@@ -1,0 +1,248 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+body {
+    overflow-x: hidden; /* Hide scrollbars */
+    background-color: white
+  }
+
+header{
+    height: 64px;
+    background-color: rgb(96, 90, 90);
+    width: 1536px;
+}
+
+.logo_small{
+    
+    margin-left: 10px;
+    width: 70px;
+    height: 45px;
+    margin-bottom: 20px;
+    }
+
+#navbarSupportedContent{
+        position: relative;
+        font-size: 16px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+#navbarSupportedContent li{
+        padding-right: 20px;
+        margin-bottom: 25px;
+    }
+
+#navbarSupportedContent button{
+        padding-bottom: 8px;
+        padding-right: 20px;
+        padding-left: 20px;
+        padding-top: 6px;
+    }
+
+.faq_ban img{
+        height: 370px;
+        margin-left: -11.7px;
+        width: 1536px;
+    }
+
+.faq_heading{
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    margin-top: 32px;  
+    margin-bottom: 0%;
+}
+
+.sep_contain{
+    display: inline-flex;
+    margin-left: 668px;
+  margin-right: auto;
+  margin-top: 9px;
+  margin-bottom: 0%;
+}
+
+
+
+.separator{
+    width: 24px;
+height: 25px;
+  margin-top: 4px;
+  margin-bottom: 0%;
+  margin-left: 9px;
+  margin-right: 9px;
+}
+
+.sep_state{
+    margin-top: 32px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: #646464;
+}
+
+
+.switch_button{
+    width: 930px;
+    height: 66px;
+    margin-top: 35px;
+    margin-bottom: 0%;
+    background-color: #F6F6F6;
+}
+
+.switch_button a{
+    font-size: 25px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #646464 ;
+}
+
+.switch_button .ServiceProvider {
+    width: 20%;
+}
+
+
+
+
+#faqAccordion{
+    width: 931px;
+    margin-top: 45px;
+    margin-bottom: 54px;
+}
+.accordion-item {
+	border: 0 !important;
+    background-color: white;
+}
+
+.accordion-btn {
+	font-size: 15px;
+	font-weight: bold;
+	color: #646464;
+}
+
+.question {
+	display: inline;
+	margin-left: 15px;
+}
+
+.accordion-btn.collapsed img {
+	transform: rotate(0);
+}
+
+.accordion-btn img {
+	transform: rotate(90deg);
+	transition: transform 0.4s;
+}
+
+.accordion-body {
+	padding: 18px 0;
+	padding-left: 37px;
+	font-size: 16px;
+	color: #646464;
+}
+
+.accordion-item {
+	margin-bottom: 40px;
+}
+
+
+
+
+
+
+
+.newsletter_section{
+    text-align: center;
+    margin-top: 54px;
+    
+}
+.head_newsletter{
+    margin-bottom: 15px;
+    font-size: 17px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+.newsetter{
+    border-radius: 55px;
+    border:solid .3px #565656;
+    height:40px;
+    width:235px;
+    padding:13px;
+    font-size: 13px;
+    margin-bottom: 53px;
+}
+.btn-submit{
+    background-color:#FF7B6D;
+    border-radius: 50px;
+    border:none;
+    color:white;
+    font-weight: normal;
+    font-size: 15px;
+    width:80px;
+    height:40px;
+    margin-left:5px;}
+
+
+
+#footer{
+    background-color: black;
+    width: 100%;
+    height: 195px;
+}
+
+#footer-logo{
+    width: 120px;
+height: 92px;
+margin-left: 115px;
+margin-top: 20px;
+}
+
+.footer_menu{
+    margin-right: 160px;
+    width: 581px;
+    height: 43px;
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    margin-top: 62.5px;
+}
+
+
+.social-media{
+    margin-top: 30px;
+    margin-right: 120px;
+}
+.social-media li{
+    display: inline-block;
+}
+
+.sep_ft{
+    color: white;
+    width: 1320px;
+    height: 1px;
+    margin-left: 80px;
+}
+
+
+.txt_ft{
+    color: #737381;
+    width: 493px;
+height: 16px;
+font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 25px;
+}
+.txt_ft a{
+    text-decoration: none;
+    color: #737381;
+
+}
+
+
+
+.Customer.active,
+.ServiceProvider.active {
+	background: #1d7a8c !important;
+	color: white !important;
+}
