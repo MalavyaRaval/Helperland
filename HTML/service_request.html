@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/CSS/service_request.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script src="/CSS/management.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+
+
+    <title>Service Requests</title>
+</head>
+
+<body>
+
+
+    <!--Navigation Bar-->
+    <nav class="navbar  navbar-expand-lg">
+        <div class="container-fluid navbar_div">
+            <a class="navbar-brand" href="homepage.html">
+                helperland
+            </a>
+
+            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation" style="font-size:20px;outline: none !important;box-shadow: none;">
+                <span class="navbar-toggler-icon"><i class="fas fa-bars"></i>
+                </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-end">
+
+                    <li class="nav-item nav-options user-btn"><img src="/Images/user.png" alt=""><span>James
+                            Smith</span></li>
+                    <li class="nav-item nav-options logout-btn">
+                        <button class="btn rounded-pill book-btn" type="button"><img src="/Images/logout.png"
+                                alt=""></button>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+    <section class="main-section">
+        <div class="side-nav" id="lnav-list">
+            <ul>
+                <li><button href="#" class="lnav-link">Service Management</button></li>
+                <li><button href="#" class="lnav-link">Role Management</button></li>
+                <li><button href="#" class="lnav-link">Coupon Code Management &nbsp;<img
+                            src="/Images/keyboard-right-arrow-button-copy.png" alt=""></button></li>
+                <li><button href="#" class="lnav-link">Escalation Management</button></li>
+                <li><button href="#" class="active lnav-link">Service Requests</button></li>
+                <li><button href="#" class="lnav-link">Service Providers</button></li>
+                <li><button href="#" class="lnav-link">User Management</button></li>
+                <li><button href="#" class="lnav-link">Finance Module &nbsp;<img
+                            src="/Images/keyboard-right-arrow-button-copy.png" alt=""></button></li>
+                <li><button href="#" class="lnav-link">Zip Code Management</button></li>
+                <li><button href="#" class="lnav-link">Rating Management</button></li>
+                <li><button href="#" class="lnav-link">Inquiry Management</button></li>
+                <li><button href="#" class="lnav-link">Newsletter Management</button></li>
+                <li><button href="#" class="lnav-link">Content Management &nbsp;<img
+                            src="/Images/keyboard-right-arrow-button-copy.png" alt=""></button></li>
+            </ul>
+        </div>
+
+        <div class="right-content">
+            <div class="title-content">
+                <div class="content-header">
+                    <p>Service Requests</p>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="search-form">
+                <form action="" method="post">
+
+                    <input type="text" class="form-control service-id" placeholder="Service ID" aria-label="telephone"
+                        aria-describedby="basic-addon1">
+
+                    <select class="form-select">
+                        <option selected class="disabled">Customer</option>
+                        <option value="1">David Bough</option>
+                        <option value="2">Paul Pogba</option>
+
+                    </select>
+                    <select class="form-select">
+                        <option selected class="disabled">Service Provider</option>
+                        <option value="1">Lyum watson</option>
+                        <option value="2">John Smit</option>
+                    </select>
+                    <select class="form-select">
+                        <option selected class="disabled">Status</option>
+                        <option value="1">Completed</option>
+                        <option value="2">Cancelled</option>
+                        <option value="2">Pending</option>
+                        <option value="2">New</option>
+                    </select>
+
+                    <div class="input-group date">
+                        <span class="input-group-text">
+                            <img src="/Images/admin-calendar-blue.png" alt="calender">
+                        </span>
+                        <input type="text" class="form-control date-picker" placeholder="From Date" aria-label="date"
+                            aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group date">
+                        <span class="input-group-text">
+                            <img src="/Images/admin-calendar-blue.png" alt="calender">
+                        </span>
+                        <input type="text" class="form-control date-picker" placeholder="To Date" aria-label="date"
+                            aria-describedby="basic-addon1">
+                    </div>
+
+                    <button class="search-btn"><span>Search</span></button>
+                    <button class="clear-btn"><span>Clear</span></button>
+                </form>
+            </div>
+
+
+
+            <div class="table-container">
+                <table class="status-table">
+                    <thead>
+                        <tr>
+                            <th class="serv-table-id">
+                                Service ID &nbsp;<a href="#"><img src="/Images/sort.png" alt="sort-logo"></a>
+                            </th>
+                            <th class="serv-table-date">
+                                Service Date &nbsp;<a href="#"><img src="/Images/sort.png" alt="sort-logo"></a>
+                            </th>
+                            <th class="customer-info">
+                                Customer Details &nbsp;<a href="#"><img src="/Images/sort.png" alt="sort-logo"></a>
+                            </th>
+                            <th class="service-pro">
+                                Service Provider &nbsp;<a href="#"><img src="/Images/sort.png" alt="sort-logo"></a>
+                            </th>
+                            <th class="service-status">
+                                User Status &nbsp;<a href="#"><img src="/Images/sort.png" alt="sort-logo"></a>
+                            </th>
+                            <th class="action-control">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                323436
+                            </td>
+                            <td>
+                                <p>
+                                    <img src="/Images/calendar2.png"> <span class="service-date">09/04/2018</span>
+                                </p>
+                                <p>
+                                    <img src="/Images/layer-14.png"> 12:00 - 18:00
+                                </p>
+                            </td>
+                            <td>
+                                <div class="customer-detail">
+                                    <p>
+                                        David Bough
+                                    </p>
+                                    <p>
+                                        <img src="/Images/layer-15.png"> Musterstrabe 5,12345 Bonn
+                                    </p>
+                                </div>
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                <div class="new-status">
+                                    New
+                                </div>
+                            </td>
+                            <td>
+                                <ul class="dropdown">
+                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="/Images/group-38.png" alt="dropdown">
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                        <li><a class="dropdown-item" href="#">Edit
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Deactivate
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Service History
+                                            </a></li>
+                                    </ul>
+                                </ul>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                323437
+                            </td>
+                            <td>
+                                <p>
+                                    <img src="/Images/calendar2.png"> <span class="service-date">09/04/2018</span>
+                                </p>
+                                <p>
+                                    <img src="/Images/layer-14.png"> 12:00 - 18:00
+                                </p>
+                            </td>
+                            <td>
+                                <div class="customer-detail">
+                                    <p>
+                                        David Bough
+                                    </p>
+                                    <p>
+                                        <img src="/Images/layer-15.png"> Musterstrabe 5,12345 Bonn
+                                    </p>
+                                </div>
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                <div class="new-status">
+                                    New
+                                </div>
+                            </td>
+                            <td>
+                                <ul class="dropdown">
+                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="/Images/group-38.png" alt="dropdown">
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                        <li><a class="dropdown-item" href="#">Edit
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Deactivate
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Service History
+                                            </a></li>
+                                    </ul>
+                                </ul>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                323437
+                            </td>
+                            <td>
+                                <p>
+                                    <img src="/Images/calendar2.png"> <span class="service-date">09/04/2018</span>
+                                </p>
+                                <p>
+                                    <img src="/Images/layer-14.png"> 12:00 - 18:00
+                                </p>
+                            </td>
+                            <td>
+                                <div class="customer-detail">
+                                    <p>
+                                        David Bough
+                                    </p>
+                                    <p>
+                                        <img src="/Images/layer-15.png"> Musterstrabe 5,12345 Bonn
+                                    </p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="pro_info">
+                                    <div class="cap-icon">
+                                        <img src="/Images/forma-1-copy-19.png">
+                                    </div>
+                                    <div class="pro-name">
+                                        <p>Lyum Watson</p>
+                                        <p>
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star2.png">
+                                            <img src="/Images/star2.png">
+                                            3
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="pending-status">
+                                    Pending
+                                </div>
+                            </td>
+                            <td>
+                                <ul class="dropdown">
+                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="/Images/group-38.png" alt="dropdown">
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                        <li><a class="dropdown-item" href="#">Edit
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Deactivate
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Service History
+                                            </a></li>
+                                    </ul>
+                                </ul>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                323437
+                            </td>
+                            <td>
+                                <p>
+                                    <img src="/Images/calendar2.png"> <span class="service-date">09/04/2018</span>
+                                </p>
+                                <p>
+                                    <img src="/Images/layer-14.png"> 12:00 - 18:00
+                                </p>
+                            </td>
+                            <td>
+                                <div class="customer-detail">
+                                    <p>
+                                        David Bough
+                                    </p>
+                                    <p>
+                                        <img src="/Images/layer-15.png"> Musterstrabe 5,12345 Bonn
+                                    </p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="pro_info">
+                                    <div class="cap-icon">
+                                        <img src="/Images/forma-1-copy-19.png">
+                                    </div>
+                                    <div class="pro-name">
+                                        <p>Lyum Watson</p>
+                                        <p>
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            5
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="pending-status">
+                                    Pending
+                                </div>
+                            </td>
+                            <td>
+                                <ul class="dropdown">
+                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="/Images/group-38.png" alt="dropdown">
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                        <li><a class="dropdown-item" href="#">Edit
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Deactivate
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Service History
+                                            </a></li>
+                                    </ul>
+                                </ul>
+                            </td>
+
+                        </tr>
+                        
+
+                        <tr>
+                            <td>
+                                323437
+                            </td>
+                            <td>
+                                <p>
+                                    <img src="/Images/calendar2.png"> <span class="service-date">09/04/2018</span>
+                                </p>
+                                <p>
+                                    <img src="/Images/layer-14.png"> 12:00 - 18:00
+                                </p>
+                            </td>
+                            <td>
+                                <div class="customer-detail">
+                                    <p>
+                                        David Bough
+                                    </p>
+                                    <p>
+                                        <img src="/Images/layer-15.png"> Musterstrabe 5,12345 Bonn
+                                    </p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="pro_info">
+                                    <div class="cap-icon">
+                                        <img src="/Images/forma-1-copy-19.png">
+                                    </div>
+                                    <div class="pro-name">
+                                        <p>Lyum Watson</p>
+                                        <p>
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star2.png">
+                                            4
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="complete-status">
+                                    Complete
+                                </div>
+                            </td>
+                            <td>
+                                <ul class="dropdown">
+                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="/Images/group-38.png" alt="dropdown">
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                        <li><a class="dropdown-item" href="#">Edit
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Deactivate
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Service History
+                                            </a></li>
+                                    </ul>
+                                </ul>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                323437
+                            </td>
+                            <td>
+                                <p>
+                                    <img src="/Images/calendar2.png"> <span class="service-date">09/04/2018</span>
+                                </p>
+                                <p>
+                                    <img src="/Images/layer-14.png"> 12:00 - 18:00
+                                </p>
+                            </td>
+                            <td>
+                                <div class="customer-detail">
+                                    <p>
+                                        David Bough
+                                    </p>
+                                    <p>
+                                        <img src="/Images/layer-15.png"> Musterstrabe 5,12345 Bonn
+                                    </p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="pro_info">
+                                    <div class="cap-icon">
+                                        <img src="/Images/forma-1-copy-19.png">
+                                    </div>
+                                    <div class="pro-name">
+                                        <p>Lyum Watson</p>
+                                        <p>
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star2.png">
+                                            4
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="cancel-status">
+                                    Cancelled
+                                </div>
+                            </td>
+                            <td>
+                                <ul class="dropdown">
+                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="/Images/group-38.png" alt="dropdown">
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                        <li><a class="dropdown-item" href="#">Edit
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Deactivate
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Service History
+                                            </a></li>
+                                    </ul>
+                                </ul>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                323437
+                            </td>
+                            <td>
+                                <p>
+                                    <img src="/Images/calendar2.png"> <span class="service-date">09/04/2018</span>
+                                </p>
+                                <p>
+                                    <img src="/Images/layer-14.png"> 12:00 - 18:00
+                                </p>
+                            </td>
+                            <td>
+                                <div class="customer-detail">
+                                    <p>
+                                        David Bough
+                                    </p>
+                                    <p>
+                                        <img src="/Images/layer-15.png"> Musterstrabe 5,12345 Bonn
+                                    </p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="pro_info">
+                                    <div class="cap-icon">
+                                        <img src="/Images/forma-1-copy-19.png">
+                                    </div>
+                                    <div class="pro-name">
+                                        <p>Lyum Watson</p>
+                                        <p>
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star2.png">
+                                            <img src="/Images/star2.png">
+                                            <img src="/Images/star2.png">
+                                            2
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="cancel-status">
+                                    Cancelled
+                                </div>
+                            </td>
+                            <td>
+                                <ul class="dropdown">
+                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="/Images/group-38.png" alt="dropdown">
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                        <li><a class="dropdown-item" href="#">Edit
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Deactivate
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Service History
+                                            </a></li>
+                                    </ul>
+                                </ul>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                323437
+                            </td>
+                            <td>
+                                <p>
+                                    <img src="/Images/calendar2.png"> <span class="service-date">09/04/2018</span>
+                                </p>
+                                <p>
+                                    <img src="/Images/layer-14.png"> 12:00 - 18:00
+                                </p>
+                            </td>
+                            <td>
+                                <div class="customer-detail">
+                                    <p>
+                                        David Bough
+                                    </p>
+                                    <p>
+                                        <img src="/Images/layer-15.png"> Musterstrabe 5,12345 Bonn
+                                    </p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="pro_info">
+                                    <div class="cap-icon">
+                                        <img src="/Images/forma-1-copy-19.png">
+                                    </div>
+                                    <div class="pro-name">
+                                        <p>Lyum Watson</p>
+                                        <p>
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star2.png">
+                                            4
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="complete-status">
+                                    Complete
+                                </div>
+                            </td>
+                            <td>
+                                <ul class="dropdown">
+                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="/Images/group-38.png" alt="dropdown">
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                        <li><a class="dropdown-item" href="#">Edit
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Deactivate
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Service History
+                                            </a></li>
+                                    </ul>
+                                </ul>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                323437
+                            </td>
+                            <td>
+                                <p>
+                                    <img src="/Images/calendar2.png"> <span class="service-date">09/04/2018</span>
+                                </p>
+                                <p>
+                                    <img src="/Images/layer-14.png"> 12:00 - 18:00
+                                </p>
+                            </td>
+                            <td>
+                                <div class="customer-detail">
+                                    <p>
+                                        David Bough
+                                    </p>
+                                    <p>
+                                        <img src="/Images/layer-15.png"> Musterstrabe 5,12345 Bonn
+                                    </p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="pro_info">
+                                    <div class="cap-icon">
+                                        <img src="/Images/forma-1-copy-19.png">
+                                    </div>
+                                    <div class="pro-name">
+                                        <p>Lyum Watson</p>
+                                        <p>
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star1.png">
+                                            <img src="/Images/star2.png">
+                                            <img src="/Images/star2.png">
+                                            3
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="complete-status">
+                                    Complete
+                                </div>
+                            </td>
+                            <td>
+                                <ul class="dropdown">
+                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="/Images/group-38.png" alt="dropdown">
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                        <li><a class="dropdown-item" href="#">Edit
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Deactivate
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#">Service History
+                                            </a></li>
+                                    </ul>
+                                </ul>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                <div class="page-control">
+                    <div class="page-control-left">
+                        <p>Show</p>
+                        <select name="entries" id="entries">
+                            <option value="10">10</option>
+                            <option value="10">9</option>
+                            <option value="10">8</option>
+                            <option value="10">7</option>
+                            <option value="10">6</option>
+                            <option value="10">5</option>
+                            <option value="10">4</option>
+                            <option value="10">3</option>
+                        </select>
+                        <p>entries</p>
+                    </div>
+    
+                    <div class="page-control-right" id="pg-right">
+    
+    
+    
+                        <a href=# class="page-btn"><img src="/Images/polygon-1-copy-5.png" alt="previous page"></a>
+    
+    
+                        <a href=# class="page-btn page-no active-2">
+                            <p>1</p>
+                        </a>
+    
+    
+                        <a href=# class="page-btn page-no">
+                            <p>2</p>
+                        </a>
+    
+    
+                        <a href=# class="page-btn page-no">
+                            <p>3</p>
+                        </a>
+    
+    
+                        <a href=# class="page-btn page-no">
+                            <p>4</p>
+                        </a>
+
+
+                        <a href=# class="page-btn page-no">
+                            <p>5</p>
+                        </a>
+    
+    
+                        <a href=# class="page-btn"><img class="next-pg" src="/Images/polygon-1-copy-5.png" alt="next  page"
+                        ></a>
+    
+    
+                       
+    
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="footer">
+                ©2018 Helperland. All rights reserved.
+            </div>
+        </div>
+
+
+    </section>
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            $(".date-picker").datepicker();
+        });
+    </script>
+</body>
+
+</html>
