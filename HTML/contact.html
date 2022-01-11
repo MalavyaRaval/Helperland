@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/CSS/contact.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <title>Contact Us</title>
+</head>
+
+<body>
+
+
+    <!--Navigation Bar-->
+    <nav class="navbar  navbar-expand-lg ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="homepage.html">
+                <img src="/Images/logo-large.png" alt="Helperland">
+            </a>
+            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation" style="color: #81b6c1;font-size:20px;">
+                <span class="navbar-toggler-icon"><i class="fas fa-bars"></i>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav  ms-auto  mb-lg-0 align-items-end">
+                    <li class="nav-item nav-btn-itmes">
+                        <button class="btn rounded-pill nav-btn" type="button">Book Now</button>
+                    </li>
+                    <li class="nav-item nav-btn-itmes">
+                        <button class="btn rounded-pill nav-btn price-btn" type="button">Prices & services</button>
+                    </li>
+                    <li class="nav-item nav-link-items"><a class="nav-link" href="#">Warranty</a></li>
+                    <li class="nav-item nav-link-items"><a class="nav-link" href="#">Blog</a></li>
+                    <li class="nav-item nav-link-items"><a class="nav-link" href="#">Contact</a></li>
+                    <li class="nav-item nav-btn-itmes">
+                        <button class="btn rounded-pill nav-btn" type="button">Login</button>
+                    </li>
+                    <li class="nav-item nav-btn-itmes">
+                        <button class="btn rounded-pill nav-btn" type="button">Become a Helper</button>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="header_banner">
+        <img src="/Images/group-16_2.png" alt="banner">
+    </div>
+
+
+    <section class="mid-content">
+
+
+        <div class="contact_heading">
+            <h1>Contact Us</h1>
+        </div>
+
+        <div class="container-fluid sep_contain">
+            <hr class="sep_hr" width="62px" height="1px">
+            <img class="separator" src="/Images/separator.png" alt="">
+            <hr class="sep_hr" width="62px" height="1px">
+        </div>
+
+
+        <div class="contact-service d-flex flex-wrap align-items-center justify-content-center">
+            <div class="contact-forms">
+                <div class="contact-image d-flex align-items-center justify-content-center">
+                    <img src="/Images/forma-1_2.png" alt="">
+                </div>
+                <div class="contact-text text-center"><span>1111 Lorem ipsum text 100, Lorem ipsum AB</span></div>
+            </div>
+            <div class="contact-forms">
+                <div class="contact-image d-flex align-items-center justify-content-center">
+                    <img src="/Images/phone-call.png" alt="">
+                </div>
+                <div class="contact-text text-center"><span>+49 (40) 123 56 7890   +49 (40) 123 56 7000</span></div>
+            </div>
+            <div class="contact-forms">
+                <div class="contact-image d-flex align-items-center justify-content-center">
+                    <img src="/Images/vector-smart-object.png" alt="">
+                </div>
+                <div class="contact-text text-center contact-mail"><span>info@helperland.com</span></div>
+            </div>
+        </div>
+
+
+
+        <div class="sep-hr2">
+            <hr>
+        </div>
+
+        <div class="touch-heading">
+            <h1>Get in touch with us</h1>
+        </div>
+
+        <div class="container-fluid sep_contain">
+            <hr class="sep_hr" width="62px" height="1px">
+            <img class="separator" src="/Images/separator.png" alt="">
+            <hr class="sep_hr" width="62px" height="1px">
+        </div>
+
+
+        <form class="row g-3 contact_form">
+            <div class="col-md-6 col-sm-12">
+                <input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group">
+                    <div class="input-group-text">+45</div>
+                    <input type="number" class="form-control" id="inputPhoneNo" placeholder="Mobile Number">
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <input type="email" class="form-control" id="inputEmail" placeholder="E-Mail Address">
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <select id="inputState" class="form-select">
+                    <option value="" disabled selected hidden id="disabled">Subject</option>
+                    <option value="career">Career</option>
+                    <option value="inquiry">Inquiry</option>
+                </select>
+            </div>
+            <div class="col-12">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Message"></textarea>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn submit_button rounded-pill">Submit</button>
+            </div>
+        </form>
+
+
+    </section>
+
+
+    <section class="map">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2525.2755560860005!2d7.130313315795984!3d50.73337787951551!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b8addff5d1803d%3A0x518acab4fd9eb236!2sHelperland%20GmbH!5e0!3m2!1sen!2sin!4v1640106596909!5m2!1sen!2sin"
+             allowfullscreen="" loading="lazy"></iframe>
+
+            <!--img src="/Images/pin.png" alt="locationMarker">
+
+			<img src="/Images/group-16.png" alt="mapImage"-->
+    </section>
+
+
+
+    <div class="container-fluid news_letter">
+        <p class="head_newsletter">GET OUR NEWSLETTER</p>
+        <form action="#" method="submit">
+            <input class="newsetter" type="email" name="email" placeholder="YOUR EMAIL"> <input type="submit"
+                class="btn-submit" name="submit" value="Submit">
+        </form>
+    </div>
+
+
+    <footer>
+        <div class="container d-flex justify-content-between align-items-center foot_menu">
+            <img class="footer-logo" src="/Images/footer-logo.png" alt="" />
+            <div class="d-flex flex-wrap text-center justify-content-center foot_menulink">
+                <a class="px-3" href="home.html">HOME</a>
+                <a class="px-3" href="#">ABOUT</a>
+                <a class="px-3" href="#">TESTIMONIALS</a>
+                <a class="px-3" href="faq.html">FAQS</a>
+                <a class="px-3" href="#">INSURANCE POLICY</a>
+                <a class="px-3" href="#">IMPRESSUM</a>
+            </div>
+            <div class="icons">
+                <a href="#"><img class="img-fluid fimg1" src="/Images/ic-facebook.png" /></a>
+                <a href="#"><img class="img-fluid fimg2" src="/Images/ic-instagram.png" /></a>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center text-center" style="margin-top:10px">
+            <hr style="border-bottom: 1px solid grey; width: 88%" />
+        </div>
+
+        <p class="text-center term_c">©2018 Helperland. All rights reserved.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+                href="#">Terms and Conditions</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">Privacy
+                Policy</a></p>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
