@@ -32,7 +32,7 @@ body {
     font-size: 15px;
 }
 .nav-btn{
-    color: white;
+    color: white !important;
     background-color: #29626D;
     border: solid 1px white;
 }

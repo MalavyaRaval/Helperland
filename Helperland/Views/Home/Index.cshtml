@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
 
@@ -121,13 +121,13 @@
                         </div>
                     </div>
                     <div class="forgot-pass">
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#fgpass-modal" data-bs-dismiss="modal">Forgot Password?</a>
+                        <a class="forgot-pass-link" type="button" data-bs-toggle="modal" data-bs-target="#fgpass-modal" data-bs-dismiss="modal" href="#fgpass-modal">Forgot Password?</a>
                     </div>
                     <div class="create-acc">
                         <span>
                             Don't have an account?
                         </span>
-                        <a>
+                        <a type="button" class="create-acc-link" asp-action="Signup">
                             Create an account
                         </a>
                     </div>
@@ -216,7 +216,7 @@
 
 
         <div class="down-arrow">
-            <a><img src="~/Images/group-18_5.png" alt="down-arrow"></a>
+            <a href="#CustomerVoice"><img src="~/Images/group-18_5.png" alt="down-arrow"></a>
         </div>
 
     </header>
@@ -483,35 +483,7 @@
     </section>
 
 
-
-
-    <!--Footer-->
-    <footer>
-        <div class="container d-flex justify-content-between align-items-center foot_menu">
-            <img class="footer-logo" src="~/Images/footer-logo.png" alt="" />
-            <div class="d-flex flex-wrap text-center justify-content-center foot_menulink">
-                <a class="px-3" asp-action="Index">HOME</a>
-                <a class="px-3" asp-action="About">ABOUT</a>
-                <a class="px-3" >TESTIMONIALS</a>
-                <a class="px-3" asp-action="Faq">FAQS</a>
-                <a class="px-3" >INSURANCE POLICY</a>
-                <a class="px-3" >IMPRESSUM</a>
-            </div>
-            <div class="icons">
-                <a ><img class="img-fluid fimg1" src="~/Images/ic-facebook.png" /></a>
-                <a ><img class="img-fluid fimg2" src="~/Images/ic-instagram.png" /></a>
-            </div>
-        </div>
-        <div class="d-flex justify-content-center align-items-center text-center" style="margin-top:10px">
-            <hr style="border-bottom: 1px solid grey; width: 88%" />
-        </div>
-
-        <p class="text-center term_c">
-            ©2018 Helperland. All rights reserved.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>Terms and Conditions</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a>
-                Privacy Policy
-            </a>
-        </p>
-    </footer>
+    
 
     <div class="d-flex align-items-center justify-content-around fixed-bottom policy-agree" id="policy">
 

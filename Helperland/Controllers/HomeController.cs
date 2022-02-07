@@ -1,4 +1,5 @@
 ﻿using Helperland.Models;
+using Helperland.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -6,46 +7,59 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Helperland.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly HelperlandContext _helperlandContext;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public HomeController(HelperlandContext helperlandContext, IWebHostEnvironment webHostEnvironment)
         {
-            _logger = logger;
+            _helperlandContext = helperlandContext;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
         {
-            return PartialView();
+            return View();
         }
 
         public IActionResult Prices()
         {
-            return PartialView();
+            return View();
         }
 
         public IActionResult Contact()
         {
-            return PartialView();
+            ContactUs contactUs = new ContactUs();
+            return View(contactUs);
         }
+
 
         public IActionResult Faq()
         {
-            return PartialView();
+            return View();
         }
 
         public IActionResult About()
         {
-            return PartialView();
+            return View();
         }
 
         public IActionResult BecomePro()
         {
-            return PartialView();
+            return View();
+        }
+
+        
+        [HttpPost]
+        public IActionResult Contact(ContactUs contactUs)
+        {
+            _helperlandContext.ContactUs.Add(contactUs);
+            _helperlandContext.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -385,55 +385,6 @@ body {
 
 
 
-/*Footer*/
-footer{
-    background-color: #111111;
-    width: 100%;
-    color: white;
-    min-height: 195px;
-  }
-  .footer-logo{
-      width: 120px;
-      height: 92px;
-  }
-footer .container a {
-    text-decoration: none;
-    color: #F1F1F1;
-    font-size: 14px;
-  }
-.foot_menu{
-    padding-top: 20px;
-    max-width: 1350px;
-  }
-.icons{
-padding-top: +15px;
-}
-.fimg1 {
-    width: 9px;
-    height: 18px;
-    margin-right: 20px;
-  }
-.fimg2 {
-    width: 20px;
-    height: 20px;
-  }
-  
-.term_c{
-    color: #9BA0A3;
-    font-size: 14px;
-  }
-.term_c a{
-      text-decoration: none;
-      color: #9BA0A3;
-  }
-.foot_menulink{
-padding-top: +20px;
-margin-left: -25px;
-}
-
-
-
-
 
 
 
@@ -538,11 +489,14 @@ margin-left: -25px;
     text-align: center;
     margin-top: 7px;
 }
-.forgot-pass a{
+.forgot-pass-link {
     color: #1D7A8C;
     text-decoration: none;
     font-size: 14px;
 }
+    .forgot-pass-link:hover {
+        text-decoration: none;
+    }
 .create-acc{
     text-align: center;
     font-size: 14px;
@@ -553,8 +507,11 @@ margin-left: -25px;
     color: #4F4F4F;
     margin-right: 5px;
 }
-.create-acc a{
+.create-acc-link{
     color: #1D7A8C;
+    text-decoration: none;
+}
+.create-acc-link:hover{
     text-decoration: none;
 }
 
@@ -753,30 +710,7 @@ margin-left: -25px;
 
 
 
-    .foot_menulink a{
-        padding-top: +5px;
-        padding-bottom: +5px;
-    }
-    .fimg1{
-        margin-left: +5px;
-    }
 
-    .foot_menu{
-        flex-direction: column;
-    }
-    .foot_menulink{
-        flex-direction: column;
-        margin-left: +5px;
-    
-    }
-    .foot_menulink a{
-        padding-top: +5px;
-        
-    }
-    .footer-logo{
-        width: 25%;
-        height: auto;
-    }
 }
 
 
@@ -870,19 +804,6 @@ margin-left: -25px;
         margin-top: 5px;
     }
 
-
-    .foot_menulink a{
-        padding-top: +5px;
-        padding-bottom: +5px;
-    }
-    .fimg1{
-        margin-left: +5px;
-        margin-bottom: +5px;
-    }
-    .footer-logo{
-        width: 90px;
-        height: auto;
-    }
 }
 
 
