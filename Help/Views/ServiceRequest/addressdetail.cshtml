@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "addressdetail";
+}
+
+<div id="tab-content3" class="contents">
+    <div>
+        <p class="details-text">Enter your details, so that we can serve you in better way!</p>
+        <div class="details-input">
+            <input type="checkbox" name="address" id="address">
+            <label class="address-label" for="address">
+                <span class="address-text"><span>Address: </span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+                <br />
+                <span class="address-contact"><span>Phone Number: </span>9955995599</span>
+            </label>
+        </div>
+        <button class="btn rounded-pill add-address" data-bs-target="#address-modal" data-bs-toggle="modal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+            </svg>
+            Add New Address
+        </button>
+    </div>
+    <input type="button" name="submit" value="Continue" class="btn rounded-pill continue cont-2" onclick="SaveAddress();">
+</div>
