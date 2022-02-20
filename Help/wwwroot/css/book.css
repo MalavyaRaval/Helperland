@@ -132,6 +132,7 @@ body {
     text-decoration: none;
     color: #646464;
     font-size: 18px;
+    margin:0;
 }
 .tabs:hover{
     color: #646464;
@@ -351,45 +352,73 @@ input[type=checkbox].htmlcheckbox {
 
 
 
-
-
-
-
-
-
 /* Tab3 Content */
+.cont-2 {
+    margin-top: 50px !important;
+}
+
 .details-text {
     color: #4F4F4F;
     font-size: 18px;
     font-weight: bold;
 }
 
-.details-input {
-    padding: 5px 20px;
-    margin: 10px 0px;
+.radiobutton {
+    padding: 5px 5px;
+    margin: 20px 0px;
     border: solid 1px #C8C8C8;
 }
-.address-label {
+.radiobutton label {
     margin-top: +5px;
     margin-left: 10px;
     color: #4F4F4F;
 }
-.address-text span, .address-contact span {
-    font-weight: bold;
-}
+
 .add-address {
-    margin-top: 20px;
+    margin-top: 15px;
     padding: 7px 12px;
     background-color: #fff;
     color: #1D7A8C;
     border: solid 1px #1D7A8C;
+    font-weight:bolder;
 }
+
 .add-address:hover {
-        color: #1D7A8C;
+   color: #1D7A8C;
 }
-.cont-2{
-    margin-top: 50px !important;
+
+.save {
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #1D7A8C;
+    border: solid 1px #1D7A8C;
 }
+.cancel {
+    margin-left: 10px;
+    color: #fff;
+    border: solid 1px #fff;
+    background-color: #1D7A8C;
+}
+
+#addNewaddressDiv {
+    display: none;
+    background-color: #f2f2f2;
+    border: solid 1px #C8C8C8;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.address_form input{
+    padding: 10px 0px;
+}
+.disable-div {
+    pointer-events: none;
+}
+
+
+
+
+
 
 
 /* Right Section */

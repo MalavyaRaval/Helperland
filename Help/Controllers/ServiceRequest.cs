@@ -76,5 +76,95 @@ namespace Help.Controllers
             }
         }
 
+
+
+
+        [HttpGet]
+        public IActionResult DetailsService(Setupservice obj)
+        {
+
+            int Id = -1;
+
+            List<Address> Addresses = new List<Address>();
+            if (HttpContext.Session.GetInt32("userId") != null)
+            {
+                Id = (int)HttpContext.Session.GetInt32("userId");
+            }
+            else if (Request.Cookies["userId"] != null)
+            {
+                Id = int.Parse(Request.Cookies["userId"]);
+
+            }
+
+
+            string postalcode = obj.ZipCode;
+            Console.WriteLine(obj.ZipCode);
+            var table = _helperlandContext.UserAddresses.Where(x => x.UserId == Id && x.PostalCode == postalcode).ToList();
+            Console.WriteLine(table.ToString());
+
+            foreach (var add in table)
+            {
+                Console.WriteLine("1");
+                Address useradd = new Address
+                {
+                    AddressId = add.AddressId,
+                    AddressLine1 = add.AddressLine1,
+                    AddressLine2 = add.AddressLine2,
+                    City = add.City,
+                    PostalCode = add.PostalCode,
+                    Mobile = add.Mobile,
+                    isDefault = add.IsDefault
+                };
+
+                Addresses.Add(useradd);
+            }
+            Console.WriteLine("2");
+
+            return new JsonResult(Addresses);
+        }
+
+
+
+
+        [HttpPost]
+        public ActionResult AddNewAddress(UserAddress useradd)
+        {
+            Console.WriteLine("Inside Addnew address 1");
+            int Id = -1;
+
+
+            if (HttpContext.Session.GetInt32("userId") != null)
+            {
+                Id = (int)HttpContext.Session.GetInt32("userId");
+            }
+            else if (Request.Cookies["userId"] != null)
+            {
+                Id = int.Parse(Request.Cookies["userId"]);
+
+            }
+            Console.WriteLine("Inside Addnew address 2");
+            Console.WriteLine(Id);
+
+            useradd.UserId = Id;
+            useradd.IsDefault = false;
+            useradd.IsDeleted = false;
+            User user = _helperlandContext.Users.Where(x => x.UserId == Id).FirstOrDefault();
+            useradd.Email = user.Email;
+            var result = _helperlandContext.UserAddresses.Add(useradd);
+            Console.WriteLine("Inside Addnew address 3");
+            _helperlandContext.SaveChanges();
+
+            Console.WriteLine("Inside Addnew address 4");
+            if (result != null)
+            {
+                return Ok(Json("true"));
+            }
+
+            return Ok(Json("false"));
+        }
+
+
+
+
     } 
 }

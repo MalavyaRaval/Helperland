@@ -71,6 +71,7 @@ function SaveServiceDetail() {
                 $("#tab-content4").hide();
                 $("#tab-content3").show();
 
+                loadAddress();
             }
             else {
                 alert("Schedule is not valid");
@@ -93,24 +94,27 @@ function Tab3Click() {
         $("#tab1").addClass("active");
         $("#tab4").removeClass("active").addClass("tabs");
         $("#tab-content1").hide();
-        $("#tab-content3").hide();
+        $("#tab-content2").hide();
         $("#tab-content4").hide();
-        $("#tab-content2").show();
+        $("#tab-content3").show();
 
     }
 }
+//$('#element').click(function () {
+//    if ($('#address'+i+'').is(':checked')) { alert("it's checked"); }
+//});
+function SaveAddressForm() {
+    
+        $("#tab4").addClass("active");
+        $("#tab3").addClass("active");
+        $("#tab2").addClass("active");
+        $("#tab1").addClass("active");
 
-function SaveAddress() {
-    $("#tab4").addClass("active");
-    $("#tab3").addClass("active");
-    $("#tab2").addClass("active");
-    $("#tab1").addClass("active");
-
-    $("#tab-content1").hide();
-    $("#tab-content2").hide();
-    $("#tab-content3").hide();
-    $("#tab-content4").show();
-   /* $("#confirmZipCode").html($("#ZipCode").val()); */
+        $("#tab-content1").hide();
+        $("#tab-content2").hide();
+        $("#tab-content3").hide();
+        $("#tab-content4").show();
+    
 }
 
 
@@ -129,27 +133,7 @@ $(function () {
     $(".date-picker").datepicker();
 });
 
-function getDate() {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
 
-    if (dd < 10) {
-        dd = '0' + dd
-    }
-
-    if (mm < 10) {
-        mm = '0' + mm
-    }
-
-    today = yyyy + '/' + mm + '/' + dd;
-    console.log(today);
-    document.getElementById("date").value = today;
-}
-window.onload = function () {
-    getDate();
-};
 
 
 
@@ -224,3 +208,114 @@ $(document).ready(function () {
         }
     });
 });
+
+
+function addAddressdiv() {
+    
+    $("#addAddressBtn").hide();
+    $("#addNewaddressDiv").show();
+
+    /*$("#ZipCode").change(function () {
+        $("#addAddressPostalCode").val($("#ZipCode").val());
+    });*/
+
+    $("#addAddressPostalCode").addClass("disable-div");
+
+    document.getElementById('addAddressPostalCode').value = document.getElementById("ZipCode").value;
+
+}
+
+
+
+function loadAddress() {
+    var data = $("#form1").serialize();
+    
+    $.ajax({
+        type: 'get',
+        url: '/ServiceRequest/DetailsService',
+        contenttype: 'application/x-www-form-urlencoded; charset=utf-8',
+        data: data,
+        success: function (result) {
+            var address = $("#address");
+            address.empty();
+            address.append('<p class="details-text">Please select your address:</p>');
+            if (result.length == 0) {
+
+                document.getElementById("addAddressBtn").click();
+
+            }
+            else {
+                for (let i = 0; i < result.length; i++) {
+                var checked = "";
+                if (result[i].isDefault == true) {
+                    checked = "checked";
+                }
+                address.append(' <div class="radiobutton">' +
+                    '<input type="radio" id=" '+i+' " ' + checked + ' name="address" value="' + result[i].addressId + '" />' +
+                    '<label for=" ' + i + ' "><span><strong>Address: </strong></span>&nbsp;<span>' + result[i].addressLine1 + '</span>,&nbsp;<span>' + result[i].addressLine2 + '</span>&nbsp;<span>' + result[i].city + '</span>-&nbsp;<span>' + result[i].postalCode + '</span>' +
+                    '<br><span><strong>Phone Number: </strong></span> ' + result[i].mobile + ' <span></span></label></div>');
+                checked = "";
+                }
+                console.log(result);
+            }
+        },
+        error: function () {
+            alert('failed to receive the data');
+            console.log('failed ');
+        }
+    });
+}
+
+
+
+function saveAddress() {
+    //alert("In Address 1")
+    var data = {};
+    data.AddressLine1 = document.getElementById("AddressLine1").value;
+    data.AddressLine2 = document.getElementById("AddressLine2").value;
+    data.PostalCode = document.getElementById("addAddressPostalCode").value;
+    data.City = document.getElementById("City").value;
+    data.Mobile = document.getElementById("Mobile").value;
+    //alert("In Address 2")
+
+
+    $.ajax({
+        type: 'POST',
+        url: '/ServiceRequest/AddNewAddress',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        data: data,
+        success: function (result) {
+            if (result.value == "true") {
+                document.getElementById("addressCancelBtn").click();
+                loadAddress();
+            }
+            else {
+                alert('Sorry! Something went wrong please try again later.');
+            }
+        },
+        error: function () {
+            alert('Failed to receive the Data');
+            console.log('Failed ');
+        }
+    });
+}
+
+
+
+function cancelAddress() {
+    document.getElementById("addNewaddressDiv").style.display = "none";
+    document.getElementById('addAddressBtn').style.display = "block";
+}
+
+
+
+/*$(document).ready(function () {
+    
+        if ($('#address').val() != '') {
+            $('#AddContbtn').prop('disabled', false);
+        }
+        else {
+            $('#AddContbtn').prop('disabled', true);
+        }
+   
+});*/
