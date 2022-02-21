@@ -85,10 +85,10 @@ C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\Cus
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\Provider.cshtml.g.cs
 C:\Users\user\source\repos\Help\bin\Debug\netcoreapp3.1\BCrypt.Net-Next.dll
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserManage\ResetPassword.cshtml.g.cs
-C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\ServiceRequest\BookService.cshtml.g.cs
-C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\ServiceRequest\setupservice.cshtml.g.cs
-C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\ServiceRequest\addressdetail.cshtml.g.cs
-C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\ServiceRequest\completebooking.cshtml.g.cs
-C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\ServiceRequest\scheduleservice.cshtml.g.cs
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\Shared\ForgetPassword.cshtml.g.cs
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\Shared\LoginModal.cshtml.g.cs
+C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\ServiceManage\addressdetail.cshtml.g.cs
+C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\ServiceManage\BookService.cshtml.g.cs
+C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\ServiceManage\completebooking.cshtml.g.cs
+C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\ServiceManage\scheduleservice.cshtml.g.cs
+C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\ServiceManage\setupservice.cshtml.g.cs

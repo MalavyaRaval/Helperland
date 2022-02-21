@@ -32,7 +32,7 @@ function SearchZipCode() {
 
     $.ajax({
         type: 'POST',
-        url: '/ServiceRequest/ValidPostalCode',
+        url: '/ServiceManage/ValidPostalCode',
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         data: data,
         success: function (result) {
@@ -59,7 +59,7 @@ function SaveServiceDetail() {
 
     $.ajax({
         type: 'POST',
-        url: '/ServiceRequest/ScheduleService',
+        url: '/ServiceManage/ScheduleService',
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         data: data,
         success: function (result) {
@@ -232,7 +232,7 @@ function loadAddress() {
     
     $.ajax({
         type: 'get',
-        url: '/ServiceRequest/DetailsService',
+        url: '/ServiceManage/DetailsService',
         contenttype: 'application/x-www-form-urlencoded; charset=utf-8',
         data: data,
         success: function (result) {
@@ -281,7 +281,7 @@ function saveAddress() {
 
     $.ajax({
         type: 'POST',
-        url: '/ServiceRequest/AddNewAddress',
+        url: '/ServiceManage/AddNewAddress',
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         data: data,
         success: function (result) {
@@ -319,3 +319,85 @@ function cancelAddress() {
         }
    
 });*/
+
+
+
+
+function completeBookService() {
+    var data = {};
+    var extrahour = 0;
+    var cabinet = document.getElementById("insideCabinetCheck");
+    var window = document.getElementById("interiorCheck");
+    var fridge = document.getElementById("insideFridgeCheck");
+    var oven = document.getElementById("insideOvenCheck");
+    var laundry = document.getElementById("laundryCheck");
+    if (cabinet.checked == true) {
+        extrahour += 0.5;
+        data.cabinet = true;
+    }
+    if (window.checked == true) {
+        extrahour += 0.5;
+        data.window = true;
+    }
+    if (fridge.checked == true) {
+        extrahour += 0.5;
+        data.fridge = true;
+    }
+    if (oven.checked == true) {
+        extrahour += 0.5;
+        data.oven = true;
+    }
+    if (laundry.checked == true) {
+        extrahour += 0.5;
+        data.laundry = true;
+    }
+    data.postalCode = document.getElementById("ZipCode").value;
+    //var temp=document.getElementById("Date");
+    //alert(temp.value);
+    //var date=new Date(temp.value);
+    //alert(date);
+    //date.setHours(data.startTime,0,0,0);
+    //alert(date+"after set hours")
+    // const a = date.toISOString().split('T')[0];
+    // const b = date.toTimeString().split(' ')[0];
+    //date=a+" "+b;
+    var temp = document.getElementById("date").value;
+    data.serviceStartDate = temp + " " + document.getElementById("Time").value;
+    data.serviceHours = document.getElementById("timeduration-input").value;
+    data.extraHours = extrahour;
+    var duration = parseFloat(document.getElementById("timeduration-input").value);
+    var extra = parseFloat(extrahour);
+    // data.subTotal = (extrahour * 25) + ((document.getElementById("Duration").value) * 25);
+    data.subTotal = (extra + duration) * 25;
+    data.totalCost = data.subTotal; //Discount 0(out of scope)
+    data.comments = document.getElementById("comment").value;
+    //data.paymentDue = false;
+    data.HasPet = document.getElementById("have-pet").checked;
+    //alert(document.getElementById("have-pet").checked);
+    //alert(data.HasPet);
+    //data.paymentDone = true;
+    //data.addressId = $('#addresses div input[type=radio]:checked').val();
+    data.addressId = document.querySelector('input[name="address"]:checked').value;
+    //alert(data.addressId);
+    $.ajax({
+        type: 'post',
+        url: '/ServiceManage/CompleteBooking',
+        contenttype: 'application/x-www-form-urlencoded; charset=utf-8',
+        data: data,
+        success: function (result) {
+            if (result.value == "false") {
+                alert("schedule is not valid");
+            }
+            else {
+                //$("#modalserviceid").text("service id : " + result.value);
+                // $("#completebookingmodalbtn").click();
+                alert("Completed")
+            }
+        },
+        error: function () {
+            alert('failed to receive the data');
+            console.log('failed ');
+        }
+    });
+}
+

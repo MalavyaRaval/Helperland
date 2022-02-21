@@ -14,7 +14,7 @@ namespace Help.ViewModels
         public string Time { get; set; }
 
 
-        public int Duration { get; set; }
+        public float Duration { get; set; }
 
 
         public Extra extra { get; set; }

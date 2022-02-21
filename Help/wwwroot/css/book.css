@@ -417,7 +417,39 @@ input[type=checkbox].htmlcheckbox {
 
 
 
+/*Tab-4 Content*/
+.apply-btn {
+    margin-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #fff;
+    border: solid 1px #fff;
+    background-color: #1D7A8C;
+}
+.apply-btn:hover{
+    color: #1D7A8C;
+    border: solid 1px #1D7A8C;
+    background-color: #fff;
+}
+.promobox{
+    padding: 7px 10px;
+}
+.donebook {
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #1D7A8C;
+    color: #fff;
+    float: right;
+    margin-top: 30px;
+    padding: 10px 25px;
+    border: solid 1px #fff;
+}
 
+.donebook:hover{
+    background-color: #fff;
+    color: #1D7A8C;
+    border: solid 1px #1D7A8C;
+}
 
 
 
