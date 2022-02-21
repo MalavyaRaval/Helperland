@@ -16,11 +16,13 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
-    <link rel="stylesheet"  href="~/css/homepage.css">
+
+    <link rel="stylesheet" href="~/css/homepage.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
     <title>Homepage</title>
 </head>
@@ -97,8 +99,9 @@
         @await Html.PartialAsync("LoginModal")
         @await Html.PartialAsync("ForgetPassword")
 
-        @if(@TempData["LoginNeed"] != null) { 
-            <div class="alert alert-warning alert-dismissible fade show justify-content-center" role="alert" style="width:25%;height:auto;margin:auto">
+        @if (@TempData["LoginNeed"] != null)
+        {
+            <div id="NeedLogin" class="alert alert-warning alert-dismissible fade show justify-content-center" role="alert" style="width:25%;height:auto;margin:auto">
                 <strong>@TempData["LoginNeed"]</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -407,7 +410,7 @@
 
         <div class="container-fluid news_letter">
             <div class="up-arrow">
-                <a >
+                <a>
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24">
                         <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 7.58l5.995 5.988-1.416 1.414-4.579-4.574-4.59 4.574-1.416-1.414 6.006-5.988z" />
                     </svg>
@@ -429,7 +432,7 @@
     </section>
 
 
-    
+
 
     <div class="d-flex align-items-center justify-content-around fixed-bottom policy-agree" id="policy">
 
@@ -452,11 +455,21 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
-    <script>
+    <script type="text/javascript">
+
         function closefun() {
             var element = document.getElementById("policy");
             element.classList.add("d-none");
         }
+
+    </script>
+
+    <script>
+
+        $("#NeedLogin").fadeTo(2000, 500).slideUp(500, function () {
+            $("#NeedLogin").slideUp(500);
+        });
+        
     </script>
 
 </body>

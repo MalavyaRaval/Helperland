@@ -204,7 +204,9 @@ namespace Help.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
+            Response.Cookies.Delete("userid");
+
+            return RedirectToAction("Index", "Home", new { LogoutModal = "true" });
         }
 
     }
