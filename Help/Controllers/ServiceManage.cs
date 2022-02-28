@@ -28,7 +28,7 @@ namespace Help.Controllers
                 ViewBag.UserType = user.UserTypeId;
                 if (user.UserTypeId == 1)
                 {
-                    return View();
+                    return PartialView();
                 }
             }
             else if (Request.Cookies["userId"] != null)
@@ -38,7 +38,7 @@ namespace Help.Controllers
                 ViewBag.UserType = user.UserTypeId;
                 if (user.UserTypeId == 1)
                 {
-                    return View();
+                    return PartialView();
                 }
             }
             TempData["LoginNeed"] = "Please Try Logging In";
@@ -49,6 +49,7 @@ namespace Help.Controllers
         [HttpPost]
         public IActionResult ValidPostalCode(Setupservice obj)
         {
+            if (ModelState.IsValid) { 
             var list = _helperlandContext.Users.Where(x => (x.ZipCode == obj.ZipCode) && (x.UserTypeId == 2)).ToList();
 
             if (list.Count() > 0)
@@ -58,6 +59,12 @@ namespace Help.Controllers
             else {
                 TempData["wrongZipCode"] = "service provider is not avilable in this area.";
                 return Ok(Json("false"));
+            }
+            }
+
+            else
+            {
+                return Ok(Json("Invalid")); 
             }
         }
 
@@ -98,13 +105,13 @@ namespace Help.Controllers
 
 
             string postalcode = obj.ZipCode;
-            Console.WriteLine(obj.ZipCode);
+           // Console.WriteLine(obj.ZipCode);
             var table = _helperlandContext.UserAddresses.Where(x => x.UserId == Id && x.PostalCode == postalcode).ToList();
-            Console.WriteLine(table.ToString());
+           // Console.WriteLine(table.ToString());
 
             foreach (var add in table)
             {
-                Console.WriteLine("1");
+                //Console.WriteLine("1");
                 Address useradd = new Address
                 {
                     AddressId = add.AddressId,
@@ -118,7 +125,7 @@ namespace Help.Controllers
 
                 Addresses.Add(useradd);
             }
-            Console.WriteLine("2");
+            //Console.WriteLine("2");
 
             return new JsonResult(Addresses);
         }
@@ -142,25 +149,27 @@ namespace Help.Controllers
                 Id = int.Parse(Request.Cookies["userId"]);
 
             }
-            Console.WriteLine("Inside Addnew address 2");
-            Console.WriteLine(Id);
-
+            /* Console.WriteLine("Inside Addnew address 2");
+             Console.WriteLine(Id);*/
+            
             useradd.UserId = Id;
             useradd.IsDefault = false;
             useradd.IsDeleted = false;
             User user = _helperlandContext.Users.Where(x => x.UserId == Id).FirstOrDefault();
             useradd.Email = user.Email;
             var result = _helperlandContext.UserAddresses.Add(useradd);
-            Console.WriteLine("Inside Addnew address 3");
+            //Console.WriteLine("Inside Addnew address 3");
             _helperlandContext.SaveChanges();
 
-            Console.WriteLine("Inside Addnew address 4");
+            //Console.WriteLine("Inside Addnew address 4");
             if (result != null)
             {
                 return Ok(Json("true"));
             }
-
+            
             return Ok(Json("false"));
+            
+           
         }
 
 
@@ -201,7 +210,7 @@ namespace Help.Controllers
 
                 HasPets = complete.HasPets
             };
-            Console.Write(complete.HasPets);
+            //Console.Write(complete.HasPets);
             add.CreatedDate = DateTime.Now;
             add.ModifiedDate = DateTime.Now;
             add.HasIssue = false;

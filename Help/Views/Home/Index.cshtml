@@ -96,13 +96,20 @@
             </div>
         </nav>
 
-        @await Html.PartialAsync("LoginModal")
+        @await Html.PartialAsync("Login")
         @await Html.PartialAsync("ForgetPassword")
 
         @if (@TempData["LoginNeed"] != null)
         {
             <div id="NeedLogin" class="alert alert-warning alert-dismissible fade show justify-content-center" role="alert" style="width:25%;height:auto;margin:auto">
                 <strong>@TempData["LoginNeed"]</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        @if (@TempData["resetpass"] != null)
+        {
+            <div id="NeedLogin" class="alert alert-success alert-dismissible fade show justify-content-center" role="alert" style="width:25%;height:auto;margin:auto">
+                <strong>@TempData["resetpass"]</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         }
@@ -130,7 +137,7 @@
 
 
         <div class=" container-fluid book-btn">
-            <button class="rounded-pill">Let's Book a Cleaner</button>
+            <a asp-action="BookService" asp-controller="ServiceManage"><button class="rounded-pill">Let's Book a Cleaner</button></a>
         </div>
 
 
@@ -469,8 +476,41 @@
         $("#NeedLogin").fadeTo(2000, 500).slideUp(500, function () {
             $("#NeedLogin").slideUp(500);
         });
-        
+
     </script>
+
+    @if (TempData["LoginWarn"] != null)
+    {
+        <text>
+            <script>
+            $(document).ready(function () {
+               alert('@TempData["LoginWarn"]');
+            });
+            </script>
+        </text>
+    }
+
+    @if (TempData["TempPass"] != null)
+    {
+        <text>
+            <script>
+            $(document).ready(function () {
+               alert('@TempData["TempPass"]');
+            });
+            </script>
+        </text>
+    }
+
+    @if (TempData["failpass"] != null)
+    {
+        <text>
+            <script>
+            $(document).ready(function () {
+               alert('@TempData["failpass"]');
+            });
+            </script>
+        </text>
+    }
 
 </body>
 

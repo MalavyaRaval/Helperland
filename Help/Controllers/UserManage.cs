@@ -27,7 +27,8 @@ namespace Help.Controllers
         [HttpPost]
         public IActionResult Signup(User user)
         {
-
+            if(ModelState.IsValid)
+            { 
             if (_helperlandContext.Users.Where(x => x.Email == user.Email).Count() == 0 && _helperlandContext.Users.Where(x => x.Mobile == user.Mobile).Count() == 0)
             {
                 user.UserTypeId = 1;
@@ -43,7 +44,8 @@ namespace Help.Controllers
             }
             else
             {
-                ViewBag.message = "User already exist.";
+                ViewBag.signmessage = "User already exist. Try again";
+            }
             }
             return View();
 
@@ -58,8 +60,9 @@ namespace Help.Controllers
         [HttpPost]
         public IActionResult Login(Login user)
         {
+             
             string password = _helperlandContext.Users.FirstOrDefault(x => x.Email == user.Email).Password;
-            bool pass = BCrypt.Net.BCrypt.Verify(user.Password, password); 
+            bool pass = BCrypt.Net.BCrypt.Verify(user.Password, password);
 
             if (_helperlandContext.Users.Where(x => x.Email == user.Email && pass).Count() > 0)
             {
@@ -77,13 +80,16 @@ namespace Help.Controllers
 
                 HttpContext.Session.SetInt32("userId", U.UserId);
                 TempData["UserName"] = U.FirstName;
+                
 
                 if (U.UserTypeId == 1)
                 {
+                    
                     return RedirectToAction("Customer", "UserPage");
                 }
                 else if (U.UserTypeId == 2)
                 {
+                    
                     return RedirectToAction("Provider", "UserPage");
                 }
                 else
@@ -93,10 +99,14 @@ namespace Help.Controllers
 
             }
 
-            else
-            {
-                return RedirectToAction("Index", "Home", new { loginFail = "true" });
+            else {
+                TempData["LoginWarn"] = "Check Credentials Again";
+                return RedirectToAction("Index", "Home");
             }
+
+
+
+
         }
 
 
@@ -111,6 +121,8 @@ namespace Help.Controllers
         [HttpPost]
         public IActionResult BecomePro(User signup)
         {
+            if(ModelState.IsValid)
+            { 
 
             if (_helperlandContext.Users.Where(x => x.Email == signup.Email).Count() == 0 && _helperlandContext.Users.Where(x => x.Mobile == signup.Mobile).Count() == 0)
             {
@@ -127,9 +139,15 @@ namespace Help.Controllers
             }
             else
             {
-                ViewBag.message = "User already exists*";
+                ViewBag.promessage = "User already exists*";
+                    return View();
+                }
             }
-            return View();
+            else
+            {
+                return View();
+            }
+            
         }
 
 
@@ -164,12 +182,13 @@ namespace Help.Controllers
                     Credentials = new System.Net.NetworkCredential("aditrailproj@gmail.com", "Luttappi@123")
                 };
                 setup.Send(msg);
-                
+
+                TempData["TempPass"] = "To Reset Password check Email.";
                 return RedirectToAction("Index","Home");
             }
             else
             {
-                TempData["fail"] = "Check EMail";
+                TempData["failpass"] = "Invalid EMail";
                 return RedirectToAction("Index", "Home");
             }
         }
@@ -189,14 +208,19 @@ namespace Help.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ResetPassword(ResetPass user)
         {
+            if(ModelState.IsValid)
+            { 
             user.newPassword = BCrypt.Net.BCrypt.HashPassword(user.newPassword);
             var newuser = new User() { UserId = user.userID, Password = user.newPassword, ModifiedDate = DateTime.Now };
             _helperlandContext.Users.Attach(newuser);
             _helperlandContext.Entry(newuser).Property(x => x.Password).IsModified = true;
             _helperlandContext.SaveChanges();
 
+            TempData["resetpass"] = "Password reset successfully";
+             return RedirectToAction("Index", "Home");
+            }
 
-            return RedirectToAction("Index", "Home");
+            return View();
         }
 
 
@@ -206,7 +230,7 @@ namespace Help.Controllers
             HttpContext.Session.Clear();
             Response.Cookies.Delete("userid");
 
-            return RedirectToAction("Index", "Home", new { LogoutModal = "true" });
+            return RedirectToAction("Index", "Home");
         }
 
     }

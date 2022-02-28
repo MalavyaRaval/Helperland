@@ -47,7 +47,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav  ms-auto  mb-lg-0 align-items-end">
                     <li class="nav-item nav-btn-itmes">
-                        <a class="btn rounded-pill nav-btn" type="button" asp-action="BecomePro">Book Now</a>
+                        <a class="btn rounded-pill nav-btn" type="button" asp-action="BookService" asp-controller="ServiceManage">Book Now</a>
                     </li>
                     <li class="nav-item nav-btn-itmes">
                         <a class="btn rounded-pill nav-btn price-btn" asp-action="Prices" type="button">
@@ -58,7 +58,7 @@
                     <li class="nav-item nav-link-items"><a class="nav-link" href="#">Blog</a></li>
                     <li class="nav-item nav-link-items"><a class="nav-link" asp-action="Contact">Contact</a></li>
                     <li class="nav-item nav-btn-itmes">
-                        <a class="btn rounded-pill nav-btn" type="button">Login</a>
+                        <a class="btn rounded-pill nav-btn" type="button" data-bs-target="#login-modal" data-bs-toggle="modal" href="#">Login</a>
                     </li>
                     <li class="nav-item nav-btn-itmes">
                         <a class="btn rounded-pill nav-btn" type="button" asp-action="BecomePro" asp-controller="UserManage">Become a Helper</a>
@@ -68,6 +68,9 @@
             </div>
         </div>
     </nav>
+
+    @await Html.PartialAsync("Login")
+    @await Html.PartialAsync("ForgetPassword")
 
     <div class="header_banner">
         <img src="~/Images/group-16_2.png" alt="banner">
@@ -134,7 +137,7 @@
                 <input asp-for="LastName" type="text" class="form-control" id="LastName" name="LastName" placeholder="Last Name">
             </div>
             <div class="col-md-6 col-sm-12">
-                <div class="input-group"> 
+                <div class="input-group">
                     <div class="input-group-text">+45</div>
                     <input asp-for="PhoneNumber" type="tel" class="form-control" id="PhoneNumber" name="PhoneNumber" placeholder="Mobile Number">
                 </div>
@@ -158,7 +161,7 @@
                 <button class="btn submit_button rounded-pill" type="submit" value="Create">Submit</button>
             </div>
         </form>
-        
+
 
     </section>
 

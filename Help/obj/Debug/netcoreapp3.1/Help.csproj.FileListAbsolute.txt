@@ -86,9 +86,9 @@ C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\Pro
 C:\Users\user\source\repos\Help\bin\Debug\netcoreapp3.1\BCrypt.Net-Next.dll
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserManage\ResetPassword.cshtml.g.cs
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\Shared\ForgetPassword.cshtml.g.cs
-C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\Shared\LoginModal.cshtml.g.cs
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\ServiceManage\addressdetail.cshtml.g.cs
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\ServiceManage\BookService.cshtml.g.cs
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\ServiceManage\completebooking.cshtml.g.cs
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\ServiceManage\scheduleservice.cshtml.g.cs
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\ServiceManage\setupservice.cshtml.g.cs
+C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Login.cshtml.g.cs

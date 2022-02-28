@@ -44,7 +44,9 @@ function SearchZipCode() {
                 $("#tab-content2").show();
             }
             else {
-                alert("zipcode is not valid");
+                if ($("#ZipCode").val().length == 6) {
+                    alert("Service at location is currently unavailable");
+                }
             }
         }
     });
@@ -146,9 +148,11 @@ $(document).ready(function () {
 
         if (clickNum % 2 == 0) {
             $('#extra-svg1').addClass('extraclicked');
+            $('#extraduration1').show();
         }
         else {
             $('#extra-svg1').removeClass('extraclicked');
+            $('#extraduration1').hide();
         }
     });
 });
@@ -160,9 +164,11 @@ $(document).ready(function () {
 
         if (clickNum % 2 == 0) {
             $('#extra-svg2').addClass('extraclicked');
+            $('#extraduration2').show();
         }
         else {
             $('#extra-svg2').removeClass('extraclicked');
+            $('#extraduration2').hide();
         }
     });
 });
@@ -174,9 +180,11 @@ $(document).ready(function () {
 
         if (clickNum % 2 == 0) {
             $('#extra-svg3').addClass('extraclicked');
+            $('#extraduration3').show();
         }
         else {
             $('#extra-svg3').removeClass('extraclicked');
+            $('#extraduration3').hide();
         }
     });
 });
@@ -188,9 +196,11 @@ $(document).ready(function () {
 
         if (clickNum % 2 == 0) {
             $('#extra-svg4').addClass('extraclicked');
+            $('#extraduration4').show();
         }
         else {
             $('#extra-svg4').removeClass('extraclicked');
+            $('#extraduration4').hide();
         }
     });
 });
@@ -202,9 +212,11 @@ $(document).ready(function () {
 
         if (clickNum % 2 == 0) {
             $('#extra-svg5').addClass('extraclicked');
+            $('#extraduration5').show();
         }
         else {
             $('#extra-svg5').removeClass('extraclicked');
+            $('#extraduration5').hide();
         }
     });
 });
@@ -247,12 +259,12 @@ function loadAddress() {
             else {
                 for (let i = 0; i < result.length; i++) {
                 var checked = "";
-                if (result[i].isDefault == true) {
+                if (i == 0) {
                     checked = "checked";
                 }
                 address.append(' <div class="radiobutton">' +
-                    '<input type="radio" id=" '+i+' " ' + checked + ' name="address" value="' + result[i].addressId + '" />' +
-                    '<label for=" ' + i + ' "><span><strong>Address: </strong></span>&nbsp;<span>' + result[i].addressLine1 + '</span>,&nbsp;<span>' + result[i].addressLine2 + '</span>&nbsp;<span>' + result[i].city + '</span>-&nbsp;<span>' + result[i].postalCode + '</span>' +
+                    '<input class="addressbox" type="radio" id=" address'+i+' " ' + checked + ' name="address" value="' + result[i].addressId + '" />' +
+                    '<label for=" address' + i + ' "><span><strong>Address: </strong></span>&nbsp;<span>' + result[i].addressLine1 + '</span>,&nbsp;<span>' + result[i].addressLine2 + '</span>&nbsp;<span>' + result[i].city + '</span>-&nbsp;<span>' + result[i].postalCode + '</span>' +
                     '<br><span><strong>Phone Number: </strong></span> ' + result[i].mobile + ' <span></span></label></div>');
                 checked = "";
                 }
@@ -268,36 +280,69 @@ function loadAddress() {
 
 
 
-function saveAddress() {
-    //alert("In Address 1")
-    var data = {};
-    data.AddressLine1 = document.getElementById("AddressLine1").value;
-    data.AddressLine2 = document.getElementById("AddressLine2").value;
-    data.PostalCode = document.getElementById("addAddressPostalCode").value;
-    data.City = document.getElementById("City").value;
-    data.Mobile = document.getElementById("Mobile").value;
-    //alert("In Address 2")
+/*$(function () {
 
+    $("#addressForm").validate({
 
-    $.ajax({
-        type: 'POST',
-        url: '/ServiceManage/AddNewAddress',
-        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-        data: data,
-        success: function (result) {
-            if (result.value == "true") {
-                document.getElementById("addressCancelBtn").click();
-                loadAddress();
-            }
-            else {
-                alert('Sorry! Something went wrong please try again later.');
+        rules: {
+
+            AddressLine1: {
+                required: true
+            },
+            AddressLine2: {
+                required: true
+            },
+            City: {
+                required: true
+            },
+            Mobile: {
+                required: true
             }
         },
-        error: function () {
-            alert('Failed to receive the Data');
-            console.log('Failed ');
+
+        messages: {
+
+            AddressLine1: "Enter Address",
+            AddressLine2: "Enter Address",
+            City: "Enter City",
+            Mobile: "Enter Mobile"
         }
     });
+});*/
+
+
+function saveAddress() {
+    //alert("In Address 1")
+    
+        var data = {};
+        data.AddressLine1 = document.getElementById("AddressLine1").value;
+        data.AddressLine2 = document.getElementById("AddressLine2").value;
+        data.PostalCode = document.getElementById("addAddressPostalCode").value;
+        data.City = document.getElementById("City").value;
+        data.Mobile = document.getElementById("Mobile").value;
+        //alert("In Address 2")
+
+
+        $.ajax({
+            type: 'POST',
+            url: '/ServiceManage/AddNewAddress',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: data,
+            success: function (result) {
+                if (result.value == "true") {
+                    document.getElementById("addressCancelBtn").click();
+                    loadAddress();
+                }
+                else {
+                    alert('Sorry! Something went wrong please try again later.');
+                }
+            },
+            error: function () {
+                alert('Failed to receive the Data');
+                console.log('Failed ');
+            }
+        });
+   
 }
 
 
@@ -311,7 +356,7 @@ function cancelAddress() {
 
 /*$(document).ready(function () {
     
-        if ($('#address').val() != '') {
+        if ($('#address0').val() != '') {
             $('#AddContbtn').prop('disabled', false);
         }
         else {
@@ -366,9 +411,9 @@ function completeBookService() {
     data.serviceHours = document.getElementById("timeduration-input").value;
     data.extraHours = extrahour;
     var duration = parseFloat(document.getElementById("timeduration-input").value);
-    var extra = parseFloat(extrahour);
+   // var extra = parseFloat(extrahour);
     // data.subTotal = (extrahour * 25) + ((document.getElementById("Duration").value) * 25);
-    data.subTotal = (extra + duration) * 25;
+    data.subTotal = (extrahour + duration) * 25;
     data.totalCost = data.subTotal; //Discount 0(out of scope)
     data.comments = document.getElementById("comment").value;
     //data.paymentDue = false;
@@ -386,12 +431,12 @@ function completeBookService() {
         data: data,
         success: function (result) {
             if (result.value == "false") {
-                alert("schedule is not valid");
+                alert("Invalid Schedule Entry");
             }
             else {
                 //$("#modalserviceid").text("service id : " + result.value);
                 // $("#completebookingmodalbtn").click();
-                alert("Completed")
+                alert("Booking has been Completed")
             }
         },
         error: function () {
@@ -401,3 +446,88 @@ function completeBookService() {
     });
 }
 
+
+
+
+$(function () {
+    $("#pay-tnc").change(function () {
+        var len = $("#pay-tnc:checked").length;
+        if (len == 0)
+            $("#complete-booking").prop("disabled", true);
+        else
+            $("#complete-booking").removeAttr("disabled");
+    });
+    $("#pay-tnc").trigger('change');
+});
+
+
+
+$("#date").change(function () {
+    $("#at").show();
+    $("#date-detail").html($("#date").val());
+})
+
+$("#Time").change(function () {
+    $("#at").show();
+    $("#time-detail").html($("#Time").val());
+})
+
+
+$("#timeduration-input").change(function () {
+    $("#basicTime").html($("#timeduration-input").val());
+    $(".hourval").html($("#timeduration-input").val());
+})
+
+
+
+
+
+function CreatePaySummary() {
+    var dur = 0;
+    var totalhour = 0;
+
+    //add hours
+    dur = parseFloat($("#timeduration-input").val());
+    totalhour += dur;
+
+    if (document.getElementById("insideCabinetCheck").checked) {
+        totalhour += 0.5;
+    }
+    if (document.getElementById("insideFridgeCheck").checked) {
+        totalhour += 0.5;
+    }
+    if (document.getElementById("insideOvenCheck").checked) {
+
+        totalhour += 0.5;
+
+    }
+    if (document.getElementById("laundryCheck").checked) {
+        totalhour += 0.5;
+    }
+    if (document.getElementById("interiorCheck").checked) {
+        totalhour += 0.5;
+    }
+    
+    $(".hourval").html(totalhour + 'Hrs');
+    $(".total_cost").text("$" + totalhour * 25);
+
+    
+}
+
+
+$(".htmlcheckbox").change(function () {
+    CreatePaySummary();
+});
+
+$("#timeduration-input").change(function () {
+    CreatePaySummary();
+});
+
+
+
+
+var checkBoxes = $('.addressbox');
+checkBoxes.change(function () {
+    $('#AddContbtn').prop('disabled', checkBoxes.filter(':checked').length < 1);
+});
+$('.addressbox').change();

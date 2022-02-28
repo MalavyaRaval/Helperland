@@ -134,7 +134,6 @@ form .input-group{
 form .form-control::placeholder {
 	color: #a0a0a0;
 	font-size: 16px;
-    font-style: Roboto;
 }
 
 form .form-check {

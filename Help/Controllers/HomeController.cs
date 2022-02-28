@@ -33,9 +33,7 @@ namespace Help.Controllers
 
         public IActionResult Contact()
         {
-            ContactU contactUs = new ContactU();
-            return View(contactUs);
-           
+            return View();
         }
 
 

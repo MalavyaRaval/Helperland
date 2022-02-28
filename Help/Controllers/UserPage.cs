@@ -19,6 +19,7 @@ namespace Help.Controllers
             _helperlandContext = helperlandContext;
         }
 
+
         public IActionResult Customer()
         {
             if (HttpContext.Session.GetInt32("userId") != null)
