@@ -90,7 +90,7 @@ namespace Help.Controllers
         public IActionResult DetailsService(Setupservice obj)
         {
 
-            int Id = -1;
+            int Id = 0;
 
             List<Address> Addresses = new List<Address>();
             if (HttpContext.Session.GetInt32("userId") != null)
@@ -136,8 +136,8 @@ namespace Help.Controllers
         [HttpPost]
         public ActionResult AddNewAddress(UserAddress useradd)
         {
-            Console.WriteLine("Inside Addnew address 1");
-            int Id = -1;
+            //Console.WriteLine("Inside Addnew address 1");
+            int Id = 0;
 
 
             if (HttpContext.Session.GetInt32("userId") != null)
@@ -179,7 +179,7 @@ namespace Help.Controllers
         [HttpPost]
         public ActionResult CompleteBooking(CompleteBooking complete)
         {
-            int Id = -1;
+            int Id = 0;
 
 
             if (HttpContext.Session.GetInt32("userId") != null)
