@@ -44,5 +44,9 @@ namespace Help.ViewModels
         public string Email { get; set; }
 
         public string Comments { get; set; }
+
+        public float AverageRating { get; set; }
+
+        public string UserProfilePicture { get; set; }
     }
 }

@@ -24,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" defer></script>
-    <script src="~/js/customerpg.js"></script>
+    <script src="~/js/customerpg.js" defer></script>
 
     <title>Service History</title>
 
@@ -57,7 +57,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#" onclick="MySetting()">
+                            <a class="dropdown-item" onclick="MySetting()" style="cursor:pointer">
                                 My Settings
                             </a>
                         </li>
@@ -113,7 +113,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#" onclick="MySetting()">
+                                <a class="dropdown-item" onclick="MySetting()" style="cursor:pointer">
                                     My Settings
                                 </a>
                             </li>
@@ -213,6 +213,7 @@
         @await Html.PartialAsync("CustomerDashboard")
 
         <!------------------------------------------------------------------------->
+        <!--Customer Setting-->
 
         @await Html.PartialAsync("CustomerSetting")
 

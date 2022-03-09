@@ -207,13 +207,13 @@ namespace Help.Controllers
                 Comments = complete.Comments,
                 PaymentDue = false,
                 PaymentDone = true,
-
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now,
+                HasIssue = false,
+                Status = 1,
                 HasPets = complete.HasPets
             };
             //Console.Write(complete.HasPets);
-            add.CreatedDate = DateTime.Now;
-            add.ModifiedDate = DateTime.Now;
-            add.HasIssue = false;
 
             var result = _helperlandContext.ServiceRequests.Add(add);
             _helperlandContext.SaveChanges();

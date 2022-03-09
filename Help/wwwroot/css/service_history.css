@@ -315,7 +315,15 @@ tbody tr{
     font-size: 16px;
     font-weight: 500;
     border: none;
+    text-decoration: none;
 }
+.newrequestBtn:hover {
+    color: white;
+    text-decoration: none;
+}
+
+
+
 
 .dashServIddiv{
     font-weight: 600;
