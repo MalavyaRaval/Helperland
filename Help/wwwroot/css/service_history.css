@@ -283,11 +283,11 @@ tbody tr{
     height: auto;
     margin: auto;
 }
-.status-complete{
+.completed{
     background-color: rgb(67, 167, 67);
 }
-.status-cancel{
-    background-color: rgb(201, 99, 95);
+.cancelled {
+    background-color: #d4433d !important;
 }
 .rate-button{
     width: 80px;
@@ -1163,6 +1163,20 @@ padding-top: +20px;
     .newrequestBtn{
         font-size: 12px;
     }
+
+
+    .my-setting {
+        display: block;
+    }
+
+    .setting-tabs {
+        margin-left: 0%;
+    }
+
+    .setting-tab {
+        padding: 5px 10px;
+        padding-left: 0% !important;
+    }
     
 }
 @media screen and (min-width: 427px) and (max-width: 769px){
@@ -1269,6 +1283,9 @@ padding-top: +20px;
 
 
 
+    .my-setting {
+        width: 100%;
+    }
 
 
 
@@ -1342,41 +1359,6 @@ padding-top: +20px;
 
 
 
-
-    /*Form 2*/
-    .addressTable{
-        border: none;
-    }
-    .addressTable thead{
-        display: none;
-    }
-    .addressTable, .addressTable tbody, .addressTable tr, .addressTable td{
-        display: block;
-        width: 95%;
-        height: auto;
-        font-size: 18px;
-    }
-    .addressTable tbody, .addressTable tr, .addressTable td{
-        width: 100% !important;
-    }
-    
-
-    
-    .addressdetaildiv{
-        text-align: end !important;
-    }
-    .addressTable tbody tr td{
-        text-align: end !important;
-        padding-right: 5%;
-        position: relative;
-        border-bottom: solid 1px #9BA0A3;
-    }
-    .addressTable td::before{
-        content: attr(data-label);
-        position: absolute;
-        left: 3%;
-        padding-top: 3%;
-    }
 
     
     

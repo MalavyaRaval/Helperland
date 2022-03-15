@@ -742,3 +742,12 @@ $("#changePass").on('click', function () {
 });
 
 
+
+
+function exportexcel() {
+    $("#HistoryTable").table2excel({
+        name: "Table2Excel",
+        filename: "Customer-ServiceHistory",
+        fileext: ".xls"
+    });
+}

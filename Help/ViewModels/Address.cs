@@ -20,10 +20,6 @@ namespace Help.ViewModels
 
         public string Mobile { get; set; }
 
-
-
-
-
         public bool isDefault { get; set; }
     }
 }

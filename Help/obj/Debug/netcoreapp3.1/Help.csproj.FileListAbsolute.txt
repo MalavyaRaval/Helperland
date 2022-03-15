@@ -95,3 +95,8 @@ C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Login
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\CustomerDashboard.cshtml.g.cs
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\CustomerHistory.cshtml.g.cs
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\CustomerSetting.cshtml.g.cs
+C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\ProviderBlockCustomer.cshtml.g.cs
+C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\ProviderServiceHistory.cshtml.g.cs
+C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\ProviderServiceReq.cshtml.g.cs
+C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\ProviderUpcomingServ.cshtml.g.cs
+C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\ProviderSetting.cshtml.g.cs

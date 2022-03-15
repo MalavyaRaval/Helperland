@@ -139,7 +139,7 @@ namespace Help.Controllers
             }
             else
             {
-                ViewBag.promessage = "User already exists*";
+                    ViewBag.promessage = "User already exists";
                     return View();
                 }
             }

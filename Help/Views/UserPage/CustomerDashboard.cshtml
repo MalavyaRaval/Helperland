@@ -15,23 +15,23 @@
     </div>
 
 
-    <table class="dashboardTable" id="dashboardTable">
+    <table class="dashboardTable" id="DashboardTable">
 
         <thead>
             <tr>
-                <th class="col-md-1">
+                <th class="col-md-1"  style="cursor:pointer" onclick="sortDashTable(0)">
                     Service ID
                 </th>
-                <th class="col-md-1">
+                <th class="col-md-1"  style="cursor:pointer" onclick="sortDashTable(1)">
                     Service Date
                 </th>
-                <th class="col-md-2">
+                <th class="col-md-2"  style="cursor:pointer" onclick="sortDashTable(2)">
                     Service Provider
                 </th>
-                <th class="col-md-1">
+                <th class="col-md-1"  style="cursor:pointer" onclick="sortDashTable(3)">
                     Payment
                 </th>
-                <th class="col-md-2">
+                <th class="col-md-2" style="cursor:pointer">
                     Actions
                 </th>
             </tr>
@@ -91,8 +91,8 @@
                             </td>
                             <td data-label="Actions">
                                 <div class="actiobBtns">
-                                    <button class="rounded-pill customerReschedule" id="rescheduleBtn" value="@item.ServiceRequestId">Reschedule</button>
-                                    <button class="rounded-pill customerCancel" id="cancelBtn" value="@item.ServiceRequestId">Cancel</button>
+                                    <button class="rounded-pill customerReschedule" id="rescheduleBtn" value="@item.ServiceRequestId" data-bs-toggle="modal" data-bs-target="#rescheduleModal">Reschedule</button>
+                                    <button class="rounded-pill customerCancel" id="cancelBtn" value="@item.ServiceRequestId" data-bs-toggle="modal" data-bs-target="#cancelModal">Cancel</button>
                                 </div>
                             </td>
                         </tr>
@@ -293,3 +293,50 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+<script>
+
+    function sortDashTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("DashboardTable");
+        switching = true;
+        dir = "asc";
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount++;
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>
