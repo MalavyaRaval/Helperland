@@ -351,7 +351,7 @@ function getUpcomingServiceTable() {
                     + result[i].serviceRequestId + '</td>'
                     + '<td data-label="Service Date" class="US-ServDate"> <p><img src="/Images/calendar2.png" alt="calender"><span class="service-date">'
                     + result[i].date + ' </span></p>'
-                    + '<p><img src="/Images/layer-14.png" alt="clock">' + result[i].startTime + '-' + result[i].endTime + '</p></td>'
+                    + '<p><img src="/Images/layer-14.png" alt="clock">&nbsp;' + result[i].startTime + '-' + result[i].endTime + '</p></td>'
                     + '<td class="US-CustDetail" data-lable="Customer details"><p>' + result[i].customerName + '</p>'
                     + '<p><img src="/images/layer-15.png" alt=""><span class="detailContent2">' + result[i].address + ' </span></p></td>'
                     + '<td data-label="Distance" class="US-Dist"> - </td >'
@@ -379,7 +379,7 @@ function blockCustomer() {
 
     $.ajax({
         type: "GET",
-        url: '/UserPage/getCustomer',
+        url: '/UserPage/GetCustomer',
         contentType: "application/x-www-form-urlencoded; charset=UTF-8",
         success: function (result) {
             $('#customerGrid').empty();
@@ -413,7 +413,9 @@ function blockCustomer() {
                     '<button id="' + result[i].user.userId + 'B" class="' + block + ' rounded-pill BlockCustBtn">Block</button>' +
                     '<button id="' + result[i].user.userId + 'U" class="' + unblock + ' rounded-pill BlockCustBtn">UnBlock</button>' +
                     '</div></div></div>'
-                )
+                );
+
+                $('.page-control').show();
             }
 
         },
@@ -423,6 +425,52 @@ function blockCustomer() {
     });
 
 }
+
+
+
+
+
+$(document).on('click', '.BlockCustBtn', function () {
+
+    var combine = this.id;
+
+
+    var req = combine.substring(combine.length - 1, combine.length);
+    var Id = combine.substring(0, combine.length - 1);
+
+
+
+    var data = {};
+    data.Id = parseInt(Id);
+    data.Req = req;
+
+
+    $.ajax({
+        type: 'GET',
+        url: '/UserPage/BlockCustomer',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        data: data,
+        success: function (result) {
+
+            alert("User Blocked");
+            blockCustomer();
+
+
+        },
+        error: function () {
+
+            alert("error");
+        }
+    });
+
+
+
+});
+
+
+
+
+
 
 
 
@@ -508,10 +556,10 @@ function getsettingsdata() {
 
                 $("input[name=Gender][value='" + result.user.gender + "']").prop("checked", true);
             }
-        /*
+       
            if (result.user.userProfilePicture != null) {
                 $("input[name=avtar][value='" + result.user.userProfilePicture + "']").prop("checked", true);
-            } */
+            } 
 
 
         },
@@ -543,7 +591,7 @@ $("#DetailsSubmit").on('click', function () {
 
     data.user.nationalityId = $("#Nationality").val();
     data.user.gender = document.querySelector('input[name="Gender"]:checked').value;
-    //data.user.userProfilePicture = document.querySelector('input[name="avtar"]:checked').value;
+    data.user.userProfilePicture = document.querySelector('input[name="avtar"]:checked').value;
     data.address.addressLine2 = document.getElementById("detail-streetname").value;
     data.address.addressLine1 = document.getElementById("detail-Houseno").value;
     data.address.postalCode = document.getElementById("detail-zipcode").value;
@@ -564,7 +612,7 @@ $("#DetailsSubmit").on('click', function () {
 
 
                     alert("Data Updated");
-                    
+                    window.location.reload();
 
                 }
                 else {
@@ -608,6 +656,7 @@ $("#ChangePassword").on('click', function () {
             success: function (result) {
                 if (result.value == "true") {
                     alert("Password Changed Successfully.");
+                    window.location.reload();
                 }
                 else if (result.value == "false") {
                     alert("Current(Old) Password is wrong! Please try again.");
@@ -622,15 +671,269 @@ $("#ChangePassword").on('click', function () {
 });
 
 
-var serviceRequestId = $("#CancelServRequestBtn").closest("tr").getAttribute("data-value");
 
 
-$("#CancelServRequestBtn").on('click', function () {
+var serviceRequestId = "";
+
+$("#NewServTable").click(function (e) {
+
+
+    serviceRequestId = e.target.closest("tr").getAttribute("data-value");
+
+
+    if (serviceRequestId != null && e.target.classList != "newReqConflictBtn") {
+
+        document.getElementById("spserviceReqdetailsbtn").click();
+
+    }
+});
+/* all details popup model */
+
+document.getElementById("spserviceReqdetailsbtn").addEventListener("click", function () {
+
+    getAllServiceDetails();
+
+});
+
+
+function getAllServiceDetails() {
+    var data = {};
+    data.ServiceRequestId = parseInt(serviceRequestId);
+    $.ajax({
+        type: 'GET',
+        url: '/UserPage/getAllDetails',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        data: data,
+        success: function (result) {
+            if (result != null) {
+
+                showAllServiceRequestDetails(result);
+
+            }
+            else {
+                alert("result is null");
+            }
+
+        },
+        error: function () {
+
+            alert("error");
+        }
+    });
+}
+
+function showAllServiceRequestDetails(result) {
+
+    var dateTime = document.getElementById("SpServiceReqDatetime");
+    var duration = document.getElementById("SpServiceReqDuration");
+    document.getElementById("SpServiceReqId").innerHTML = serviceRequestId;
+    var extra = document.getElementById("SpServiceReqExtra");
+    var amount = document.getElementById("SpServiceReqAmount");
+    var customerName = document.getElementById("SpServiceReqCustomerName");
+    var address = document.getElementById("SpServiceReqAddress");
+    var comment = document.getElementById("SpServiceReqComment");
+    //var Status = document.getElementById("SpServiceReqStatus");
+
+
+    dateTime.innerHTML = result.date.substring(0, 10) + "<br>" + result.startTime + " - " + result.endTime;
+    duration.innerHTML = result.duration + " Hrs";
+
+
+
+    var newServiceBtn = "";
+    var upcomingServiceBtn = "";
+    switch (result.status) {
+        case 1: /*new */
+
+            newServiceBtn = "";
+            upcomingServiceBtn = "d-none";
+
+            break;
+        case 2: /*pending */
+
+            newServiceBtn = "d-none";
+            upcomingServiceBtn = "";
+            break;
+        case 3: /*completed */
+
+            newServiceBtn = "d-none";
+            upcomingServiceBtn = "d-none";
+            break;
+
+        default: /*other status */
+            alert("invalid status ")
+
+    }
+
+    document.getElementById("detailPopUpNew").className = newServiceBtn;
+
+    document.getElementById("detailPopUpUpComing").className = upcomingServiceBtn;
+
+
+
+    var popupcompleteclass = "";
+    if (result.complete) {
+        popupcompleteclass = "CompleteService";
+    } else {
+        popupcompleteclass = "d-none";
+    }
+
+    document.getElementById("newServiceReqCompleteBtn").className = popupcompleteclass;
+
+    extra.innerHTML = "";
+    if (result.cabinet == true) {
+        extra.innerHTML += "<div class='extraElement '> Inside Cabinet </div>";
+    }
+    if (result.laundry == true) {
+
+        extra.innerHTML += "<div class='extraElement'>  Laundry Wash & dry </div>";
+    }
+    if (result.oven == true) {
+        extra.innerHTML += "<div class='extraElement'>  Inside Oven  </div>";
+    }
+    if (result.fridge == true) {
+        extra.innerHTML += "<div class='extraElement'> Inside Fridge </div>";
+    }
+    if (result.window == true) {
+        extra.innerHTML += "<div class='extraElement'>  Interior Window</div>";
+    }
+    amount.innerHTML = " &euro;" + result.totalCost;
+    address.innerHTML = result.address;
+    customerName.innerHTML = result.customerName;
+    comment.innerHTML = "";
+
+    getMap(result.zipCode);
+    if (result.comments != null) {
+        comment.innerHTML = result.comments;
+    }
+}
+
+
+
+/*---map ----*/
+function getMap(zipcode) {
+
+
+
+    var embed = "<iframe width='100%25' height='100%25'  frameborder='0'  scrolling='no' marginheight='0' marginwidth='0'     src='https://maps.google.com/maps?&amp;q=" +
+        encodeURIComponent(zipcode) +
+        "&amp;output=embed'><a href='https://www.gps.ie/car-satnav-gps/'>sat navs</a></iframe>";
+
+    $('#newServiceReqMap').html(embed);
+
+}
+
+
+
+$("#newServiceReqAccept").on('click', function () {
 
     var data = {};
 
-    data.serviceRequestId = parseInt(serviceRequestId);
-    
+    var url = window.location.href;
+    if (url.indexOf('?') > -1) {
+        url = url.substring(0, url.indexOf('?'));
+    }
+
+    data.ServiceRequestId = parseInt(serviceRequestId);
+    $.ajax({
+        type: 'GET',
+        url: '/UserPage/acceptService',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        data: data,
+        success: function (result) {
+            if (result == "Suceess") {
+
+
+                alert("Service Request Accepted!");
+                window.location.reload();
+
+
+            }
+            else if (result == "Service Req Not available") {
+
+                alert("Service Request Unavailable!!");
+            }
+            else if (result == "error") {
+
+                alert("Error Occured!");
+            }
+            else {
+                
+
+                alert("Another service request " + result + " has already been assigned which has time overlap with this service request.You can’t pick this one!")
+                var conflictbtn = "#Conflict" + serviceRequestId;
+
+                $(conflictbtn).removeClass('d-none');
+                
+            }
+
+        },
+        error: function () {
+
+            alert("error");
+        }
+    });
+
+});
+
+/* conflict btn */
+
+$(".newReqConflictBtn").on('click', function () {
+
+
+    var temp = this.id.toString();
+    var id = temp.substring(8, temp.length);
+    var data = {};
+    data.ServiceRequestId = parseInt(id);
+
+    $.ajax({
+        type: 'GET',
+        url: '/UserPage/ConflictDetails',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        data: data,
+        success: function (result) {
+            alert(result);
+
+
+        },
+        error: function () {
+
+            alert("error");
+        }
+    });
+
+
+});
+
+
+
+
+
+
+
+
+
+
+$("#UpcomingServiceTable").click(function (e) {
+
+
+    serviceRequestId = e.target.closest("tr").getAttribute("data-value");
+
+
+    if (serviceRequestId != null) {
+
+        document.getElementById("spserviceReqdetailsbtn").click();
+
+    }
+});
+
+
+
+$("#newServiceReqCancelBtn").on('click', function () {
+
+    var data = {};
+
+    data.serviceRequestId = serviceRequestId;
 
     $.ajax({
         type: 'POST',
@@ -656,3 +959,37 @@ $("#CancelServRequestBtn").on('click', function () {
 });
 
 
+
+
+$("#newServiceReqCompleteBtn").on('click', function () {
+
+    var data = {};
+
+    data.serviceRequestId = serviceRequestId;
+
+    $.ajax({
+        type: 'GET',
+        url: '/UserPage/CompleteService',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        data: data,
+        success: function (result) {
+
+            if (result == "true") {
+                alert("Service Request marked as completed");
+                window.location.reload();
+
+            }
+            else {
+                alert("opps! something went wrong");
+
+            }
+
+        },
+        error: function () {
+
+            alert("error");
+        }
+    });
+
+
+});

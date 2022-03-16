@@ -251,6 +251,19 @@ tbody tr{
 
 
 
+.newReqConflictBtn {
+    border: 1px solid #FF6B6B;
+    border-radius: 17px;
+    background-color: #FF6B6B;
+    color: #FFFFFF;
+    font-size: 14px;
+    padding: 5px 12px;
+    margin: 8px 0;
+    text-decoration: none;
+}
+
+
+
 
 
 .ServHistoryControls{
@@ -388,6 +401,44 @@ tbody tr{
     border-bottom: solid 2px #1D7A8C;
 }
 
+
+
+.select-avtar .form-check-inline {
+    display: inline-block;
+    margin-right: 0rem;
+}
+
+
+
+
+
+
+
+.select-avtar .form-check {
+    min-height: 1.5rem;
+    padding-left: 1em;
+    margin-bottom: 0.125rem;
+}
+
+
+
+.form-label {
+    margin-bottom: 0.5rem;
+    margin-top: 0.7rem;
+}
+
+.select-avtar input[type="radio"] {
+    display: none;
+}
+
+.select-avtar [type=radio] + label {
+    cursor: pointer;
+}
+
+.select-avtar input[type="radio"]:checked + label {
+    border: 3px solid #146371;
+    border-radius: 50%;
+}
 
 
 .tabcontent {

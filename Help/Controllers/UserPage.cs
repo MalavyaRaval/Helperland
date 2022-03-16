@@ -586,7 +586,7 @@ namespace Help.Controllers
 
 
 
-            return new JsonResult(sPSettingsDTO);
+            return Json(sPSettingsDTO);
         }
 
 
@@ -746,7 +746,7 @@ namespace Help.Controllers
 
 
 
-        public JsonResult getCustomer()
+        public JsonResult GetCustomer()
         {
 
             int? Id = HttpContext.Session.GetInt32("userId");
@@ -767,9 +767,11 @@ namespace Help.Controllers
                 User user = _helperlandContext.Users.FirstOrDefault(x => x.UserId == temp);
                 FavoriteAndBlocked FB = _helperlandContext.FavoriteAndBlockeds.FirstOrDefault(x => x.UserId == Id && x.TargetUserId == temp);
 
-                BlockCustomerData blockCustomerData = new BlockCustomerData();
-                blockCustomerData.user = user;
-                blockCustomerData.favoriteAndBlocked = FB;
+                BlockCustomerData blockCustomerData = new BlockCustomerData
+                {
+                    user = user,
+                    favoriteAndBlocked = FB
+                };
 
                 blockData.Add(blockCustomerData);
 
@@ -809,6 +811,290 @@ namespace Help.Controllers
 
 
         }
+
+
+
+        public string BlockCustomer(BlockCust temp)
+        {
+            int? Id = HttpContext.Session.GetInt32("userId");
+            if (Id == null)
+            {
+                Id = Convert.ToInt32(Request.Cookies["userId"]);
+            }
+
+            FavoriteAndBlocked obj = _helperlandContext.FavoriteAndBlockeds.FirstOrDefault(x => x.UserId == Id && x.TargetUserId == temp.Id);
+
+            if (temp.Req == "B")
+            {
+
+                if (obj == null)
+                {
+                    obj = new FavoriteAndBlocked();
+                    obj.UserId = (int)Id;
+                    obj.TargetUserId = temp.Id;
+                    obj.IsBlocked = true;
+
+                }
+                else
+                {
+                    obj.IsBlocked = true;
+                }
+
+            }
+            else
+            {
+                obj.IsBlocked = false;
+
+            }
+
+
+
+
+
+            var result = _helperlandContext.FavoriteAndBlockeds.Update(obj);
+            _helperlandContext.SaveChanges();
+            if (result != null)
+            {
+                return "Suceess";
+            }
+            else
+            {
+                return "error";
+            }
+
+
+        }
+
+
+
+
+
+
+
+        [HttpGet]
+        public JsonResult getAllDetails(NewServiceReq ID)
+        {
+
+            NewServiceReq Details = new NewServiceReq();
+
+            ServiceRequest sr = _helperlandContext.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == ID.ServiceRequestId);
+
+            Details.ServiceRequestId = ID.ServiceRequestId;
+
+            Details.Date = sr.ServiceStartDate.ToString("dd/MM/yyyy");
+
+            Details.StartTime = sr.ServiceStartDate.ToString("HH:mm");
+
+            Details.Duration = (decimal)(sr.ServiceHours + sr.ExtraHours);
+
+            Details.EndTime = sr.ServiceStartDate.AddHours((double)Details.Duration).ToString("HH:mm");
+            Details.TotalCost = sr.TotalCost;
+            Details.Comments = sr.Comments;
+            Details.Status = (int)sr.Status;
+            Details.Complete = sr.ServiceStartDate.AddHours((double)Details.Duration) <= DateTime.Now;
+
+
+
+            List<ServiceRequestExtra> SRExtra = _helperlandContext.ServiceRequestExtras.Where(x => x.ServiceRequestId == ID.ServiceRequestId).ToList();
+
+
+
+            foreach (ServiceRequestExtra row in SRExtra)
+            {
+                if (row.ServiceExtraId == 1)
+                {
+                    Details.Cabinet = true;
+                }
+                else if (row.ServiceExtraId == 2)
+                {
+                    Details.Oven = true;
+                }
+                else if (row.ServiceExtraId == 3)
+                {
+                    Details.Window = true;
+                }
+                else if (row.ServiceExtraId == 4)
+                {
+                    Details.Fridge = true;
+                }
+                else
+                {
+                    Details.Laundry = true;
+                }
+            }
+
+            ServiceRequestAddress Address = _helperlandContext.ServiceRequestAddresses.FirstOrDefault(x => x.ServiceRequestId == ID.ServiceRequestId);
+
+            Details.Address = Address.AddressLine1 + ", " + Address.AddressLine2 + ", " + Address.City + " - " + Address.PostalCode;
+            Details.ZipCode = Address.PostalCode;
+
+            User customer = _helperlandContext.Users.FirstOrDefault(x => x.UserId == sr.UserId);
+
+            Details.CustomerName = customer.FirstName + " " + customer.LastName;
+
+
+            return new JsonResult(Details);
+        }
+
+
+
+
+        [HttpGet]
+        public string acceptService(NewServiceReq ID)
+        {
+            int? spId = HttpContext.Session.GetInt32("userId");
+            if (spId == null)
+            {
+                spId = Convert.ToInt32(Request.Cookies["userId"]);
+            }
+
+            ServiceRequest serviceRequest = _helperlandContext.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == ID.ServiceRequestId);
+            if (serviceRequest != null && serviceRequest.Status != 1)
+            {
+                return new string("Service Req Not available");
+            }
+
+            int conflict = CheckConflict((int)serviceRequest.ServiceRequestId);
+
+            if (conflict != -1)
+            {
+
+
+
+
+
+                return conflict.ToString();
+
+            }
+
+
+
+            serviceRequest.Status = 2;
+            serviceRequest.ServiceProviderId = spId;
+            serviceRequest.SpacceptedDate = DateTime.Now;
+            var result = _helperlandContext.ServiceRequests.Update(serviceRequest);
+            _helperlandContext.SaveChanges();
+            if (result != null)
+            {
+                return "Suceess";
+            }
+            else
+            {
+                return "error";
+            }
+
+        }
+
+
+        public string ConflictDetails(NewServiceReq ID)
+        {
+            Console.WriteLine(ID.ServiceRequestId);
+
+            int conflict = CheckConflict(ID.ServiceRequestId);
+
+            ServiceRequest sr = _helperlandContext.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == conflict);
+
+
+            string conflictmsg = "This Request is conflicting with Service ID: " + sr.ServiceRequestId + " on :" + sr.ServiceStartDate;
+
+
+
+
+            return conflictmsg;
+
+
+
+
+
+
+        }
+
+        public int CheckConflict(int SRID)
+        {
+
+            int? Id = HttpContext.Session.GetInt32("userId");
+            if (Id == null)
+            {
+                Id = Convert.ToInt32(Request.Cookies["userId"]);
+            }
+
+
+            ServiceRequest request = _helperlandContext.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == SRID);
+
+            String reqdate = request.ServiceStartDate.ToString("yyyy-MM-dd");
+
+            String startDateStr = reqdate + " 00:00:00.000";
+            String endDateStr = reqdate + " 23:59:59.999";
+
+
+            DateTime startDate = DateTime.ParseExact(startDateStr, "yyyy-MM-dd HH:mm:ss.fff",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+
+            DateTime endDate = DateTime.ParseExact(endDateStr, "yyyy-MM-dd HH:mm:ss.fff",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+
+            List<ServiceRequest> list = _helperlandContext.ServiceRequests.Where(x => (x.ServiceProviderId == Id) && (x.Status == 2) && (x.ServiceStartDate > startDate && x.ServiceStartDate < endDate)).ToList();
+
+            double mins = ((double)(request.ServiceHours + request.ExtraHours)) * 60;
+            DateTime endTimeRequest = request.ServiceStartDate.AddMinutes(mins + 60);
+
+            request.ServiceStartDate = request.ServiceStartDate.AddMinutes(-60);
+            Console.WriteLine(endTimeRequest);
+            Console.WriteLine(request.ServiceStartDate);
+            foreach (ServiceRequest booked in list)
+            {
+                mins = ((double)(booked.ServiceHours + booked.ExtraHours)) * 60;
+                DateTime endTimeBooked = booked.ServiceStartDate.AddMinutes(mins);
+
+                if (request.ServiceStartDate < booked.ServiceStartDate)
+                {
+                    if (endTimeRequest <= booked.ServiceStartDate)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return booked.ServiceRequestId;
+                    }
+                }
+                else
+                {
+                    if (request.ServiceStartDate < endTimeBooked)
+                    {
+                        return booked.ServiceRequestId;
+                    }
+                }
+
+            }
+
+            return -1;
+
+        }
+
+
+
+
+
+        public string CompleteService(ServiceRequest request)
+        {
+
+            ServiceRequest requestObj = _helperlandContext.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == request.ServiceRequestId);
+
+            requestObj.Status = 3;
+
+            var result = _helperlandContext.ServiceRequests.Update(requestObj);
+            _helperlandContext.SaveChanges();
+            if (result != null)
+            {
+                return "true";
+            }
+            else
+            {
+                return "false";
+            }
+        }
+
+
     }
 
 }  

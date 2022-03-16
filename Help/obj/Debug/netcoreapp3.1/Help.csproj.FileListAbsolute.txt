@@ -100,3 +100,4 @@ C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\Pro
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\ProviderServiceReq.cshtml.g.cs
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\ProviderUpcomingServ.cshtml.g.cs
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\ProviderSetting.cshtml.g.cs
+C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\ProviderRating.cshtml.g.cs
