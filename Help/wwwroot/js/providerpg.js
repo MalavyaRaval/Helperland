@@ -327,6 +327,126 @@ function getServiceHistoryTable() {
 
 
 
+$(document).ready(function () {
+
+    getUpcomingServiceTable();
+
+});
+
+
+
+function getUpcomingServiceTable() {
+
+
+    $.ajax({
+        type: "GET",
+        url: '/UserPage/getUpcomingService',
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        success: function (result) {
+            $('#UpcomingServiceTbody').empty();
+
+            for (var i = 0; i < result.length; i++) {
+
+                $('#UpcomingServiceTbody').append('<tr data-value=' + result[i].serviceRequestId + ' ><td data-label="Service ID"  class="US-ServId">'
+                    + result[i].serviceRequestId + '</td>'
+                    + '<td data-label="Service Date" class="US-ServDate"> <p><img src="/Images/calendar2.png" alt="calender"><span class="service-date">'
+                    + result[i].date + ' </span></p>'
+                    + '<p><img src="/Images/layer-14.png" alt="clock">' + result[i].startTime + '-' + result[i].endTime + '</p></td>'
+                    + '<td class="US-CustDetail" data-lable="Customer details"><p>' + result[i].customerName + '</p>'
+                    + '<p><img src="/images/layer-15.png" alt=""><span class="detailContent2">' + result[i].address + ' </span></p></td>'
+                    + '<td data-label="Distance" class="US-Dist"> - </td >'
+                    + '<td class="usTableCancelbtn"><button class="rounded-pill cancel-button" id="CancelServRequestBtn">Cancel</button></td></tr>'
+                );
+            }
+
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+
+}
+
+
+
+
+
+$(document).ready(function () {
+    blockCustomer();
+});
+
+function blockCustomer() {
+
+    $.ajax({
+        type: "GET",
+        url: '/UserPage/getCustomer',
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        success: function (result) {
+            $('#customerGrid').empty();
+
+
+
+            for (var i = 0; i < result.length; i++) {
+
+                var unblock = "d-none";
+                var block = ""
+                if (result[i].favoriteAndBlocked != null) {
+
+                    var status = result[i].favoriteAndBlocked.isBlocked;
+
+                    if (status == true) {
+                        block = "d-none";
+                        unblock = "";
+
+                    }
+
+
+                }
+
+
+
+                $('#customerGrid').append('<div class="col-md-4 col-sm-4 text-center BlockCustCard"><div class="card"><div class="card-body">' +
+                    '<div class="sp-avatar">' +
+                    '<img src = "/Images/forma-1-copy-19.png" alt = "SPAvatar" >' +
+                    '</div >' +
+                    '<h5 class="BlockcustName"> ' + result[i].user.firstName + '  </h5>' +
+                    '<button id="' + result[i].user.userId + 'B" class="' + block + ' rounded-pill BlockCustBtn">Block</button>' +
+                    '<button id="' + result[i].user.userId + 'U" class="' + unblock + ' rounded-pill BlockCustBtn">UnBlock</button>' +
+                    '</div></div></div>'
+                )
+            }
+
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+
+}
+
+
+
+
+
+
+function exportexcel() {
+    $("#ServHistoryTable").table2excel({
+        name: "Table2Excel",
+        filename: "Provider-ServiceHistory",
+        fileext: ".xls"
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -364,7 +484,7 @@ function getsettingsdata() {
                 city.value = result.address.city;
                 houseno.value = result.address.addressLine1;
 
-                getCityFromPostalCode(result.address.postalCode);
+                //getCityFromPostalCode(result.address.postalCode);
             }
 
 
@@ -396,14 +516,10 @@ function getsettingsdata() {
 
         },
         error: function () {
-            alert("error");
+            alert("Error error");
         }
     });
 }
-
-
-
-
 
 
 
@@ -421,7 +537,9 @@ $("#DetailsSubmit").on('click', function () {
     data.user.lastName = document.getElementById("detail-lname").value;
     data.user.email = document.getElementById("detail-email").value;
     data.user.mobile = document.getElementById("detail-mobile").value;
-    data.user.dateOfBirth = $("#dobday").val() + "/" + $("#dobmonth").val() + "/" + $("#dobyear").val();
+    data.user.dateOfBirth = $("#dobday").val() + "-" + $("#dobmonth").val() + "-" + $("#dobyear").val();
+
+    console.log(data.user.dateOfBirth);
 
     data.user.nationalityId = $("#Nationality").val();
     data.user.gender = document.querySelector('input[name="Gender"]:checked').value;
@@ -435,11 +553,7 @@ $("#DetailsSubmit").on('click', function () {
     data.address.mobile = document.getElementById("detail-mobile").value;
 
 
-    
-
-
-    
-        $.ajax({
+    $.ajax({
             type: 'POST',
             url: '/UserPage/UpdateProData',
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -460,7 +574,7 @@ $("#DetailsSubmit").on('click', function () {
             error: function () {
                 alert("error");
             }
-        });
+    });
 
     
 
@@ -504,6 +618,40 @@ $("#ChangePassword").on('click', function () {
             }
     });
     
+
+});
+
+
+var serviceRequestId = $("#CancelServRequestBtn").closest("tr").getAttribute("data-value");
+
+
+$("#CancelServRequestBtn").on('click', function () {
+
+    var data = {};
+
+    data.serviceRequestId = parseInt(serviceRequestId);
+    
+
+    $.ajax({
+        type: 'POST',
+        url: '/UserPage/cancelRequest',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        data: data,
+        success: function (result) {
+            if (result == "Success") {
+                alert("Request Cancelled");
+                window.location.reload();
+
+            }
+            else {
+                alert("fail");
+            }
+        },
+        error: function () {
+            alert("error");
+        }
+    });
+
 
 });
 

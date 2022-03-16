@@ -413,15 +413,6 @@ tbody tr{
     height: 2px;
 }
 
-.detail-selectlang {
-    color: #646464;
-    font-weight: 600;
-}
-
-#detail-lang option {
-    color: #646464;
-}
-
 
 
 .detail-saveBtn {
