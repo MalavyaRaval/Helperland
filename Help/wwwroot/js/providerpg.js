@@ -352,7 +352,7 @@ function getUpcomingServiceTable() {
                     + '<td data-label="Service Date" class="US-ServDate"> <p><img src="/Images/calendar2.png" alt="calender"><span class="service-date">'
                     + result[i].date + ' </span></p>'
                     + '<p><img src="/Images/layer-14.png" alt="clock">&nbsp;' + result[i].startTime + '-' + result[i].endTime + '</p></td>'
-                    + '<td class="US-CustDetail" data-lable="Customer details"><p>' + result[i].customerName + '</p>'
+                    + '<td class="US-CustDetail" data-label="Customer details"><p>' + result[i].customerName + '</p>'
                     + '<p><img src="/images/layer-15.png" alt=""><span class="detailContent2">' + result[i].address + ' </span></p></td>'
                     + '<td data-label="Distance" class="US-Dist"> - </td >'
                     + '<td class="usTableCancelbtn"><button class="rounded-pill cancel-button" id="CancelServRequestBtn">Cancel</button></td></tr>'
@@ -415,7 +415,7 @@ function blockCustomer() {
                     '</div></div></div>'
                 );
 
-                $('.page-control').show();
+                //$('.page-control').show();
             }
 
         },
@@ -501,13 +501,14 @@ function exportexcel() {
 
 $(document).ready(function () {
     getsettingsdata();
+    getaddressdata();
 });
 
 function getsettingsdata() {
 
     $.ajax({
         type: 'GET',
-        url: '/UserPage/GetProData',
+        url: '/UserPage/GetProDetail',
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 
         success: function (result) {
@@ -516,55 +517,83 @@ function getsettingsdata() {
             var lastname = document.getElementById("detail-lname");
             var email = document.getElementById("detail-email");
             var phoneno = document.getElementById("detail-mobile");
-            var Street = document.getElementById("detail-streetname");
-            var houseno = document.getElementById("detail-Houseno");
-            var pincode = document.getElementById("detail-zipcode");
-            var city = document.getElementById("detail-city");
+            
 
-            firstname.value = result.user.firstName;
-            lastname.value = result.user.lastName;
-            email.value = result.user.email;
-            phoneno.value = result.user.mobile;
+            firstname.value = result.firstName;
+            lastname.value = result.lastName;
+            email.value = result.email;
+            phoneno.value = result.mobile;
 
-            if (result.address != null) {
-                Street.value = result.address.addressLine2;
-                pincode.value = result.address.postalCode;
-                city.value = result.address.city;
-                houseno.value = result.address.addressLine1;
+            
 
-                //getCityFromPostalCode(result.address.postalCode);
-            }
-
-
-            if (result.user.dateOfBirth != null) {
-
-                var dateOfBirth = result.user.dateOfBirth.split('T');
+                var dateOfBirth = result.dateOfBirth.split('T');
                 var dateOfBirthArray = dateOfBirth[0].split("-");
                 console.log(dateOfBirthArray);
                 $("#dobday").val(dateOfBirthArray[2]);
                 $("#dobmonth").val(dateOfBirthArray[1]);
                 $("#dobyear").val(dateOfBirthArray[0]);
-            }
+            
 
-            if (result.user.nationalityId != null) {
+            
 
-                $("#Nationality").val(result.user.nationalityId);
+                $("#Nationality").val(result.nationalityId);
 
-            }
+            
 
-          if (result.user.gender != null) {
+            
 
-                $("input[name=Gender][value='" + result.user.gender + "']").prop("checked", true);
-            }
+                $("input[name=Gender][value='" + result.gender + "']").prop("checked", true);
+            
        
-           if (result.user.userProfilePicture != null) {
-                $("input[name=avtar][value='" + result.user.userProfilePicture + "']").prop("checked", true);
-            } 
+           
+                $("input[name=avtar][value='" + result.userProfilePicture + "']").prop("checked", true);
+           
 
 
         },
         error: function () {
-            alert("Error error");
+            alert("Error2");
+        }
+    });
+}
+
+
+
+
+function getaddressdata() {
+
+    $.ajax({
+        type: 'GET',
+        url: '/UserPage/GetProAddress',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+
+        success: function (result) {
+
+           /* var Street = document.getElementById("detail-streetname");
+            var houseno = document.getElementById("detail-Houseno");
+            var pincode = document.getElementById("detail-zipcode");
+            var city = document.getElementById("detail-city");
+
+
+            
+                Street.value = result.addressLine2;
+                pincode.value = result.postalCode;
+                city.value = result.city;
+            houseno.value = result.addressLine1;*/
+
+
+            $("#detail-streetname").val(result.addressLine2);
+            $("#detail-zipcode").val(result.postalCode);
+            $("#detail-city").val(result.city);
+            $("#detail-Houseno").val(result.addressLine1);
+
+                //getCityFromPostalCode(result.address.postalCode);
+            
+
+
+        },
+        error: function () {
+            alert("Error1");
         }
     });
 }
@@ -828,11 +857,6 @@ function getMap(zipcode) {
 $("#newServiceReqAccept").on('click', function () {
 
     var data = {};
-
-    var url = window.location.href;
-    if (url.indexOf('?') > -1) {
-        url = url.substring(0, url.indexOf('?'));
-    }
 
     data.ServiceRequestId = parseInt(serviceRequestId);
     $.ajax({

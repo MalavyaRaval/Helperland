@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -18,5 +20,8 @@ namespace Help.Models
         public DateTime? CreatedOn { get; set; }
         public int? CreatedBy { get; set; }
         public string FileName { get; set; }
+
+        [NotMapped]
+        public IFormFile Attach { get; set; }
     }
 }

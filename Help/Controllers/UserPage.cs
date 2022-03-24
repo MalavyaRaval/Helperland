@@ -565,28 +565,32 @@ namespace Help.Controllers
 
 
         [HttpGet]
-        public JsonResult GetProData()
+        public JsonResult GetProDetail()
         {
+
             int? Id = HttpContext.Session.GetInt32("userId");
             if (Id == null)
             {
                 Id = Convert.ToInt32(Request.Cookies["userId"]);
             }
 
-            User User = _helperlandContext.Users.FirstOrDefault(x => x.UserId == Id);
+            User user = _helperlandContext.Users.FirstOrDefault(x => x.UserId == Id);
+            return new JsonResult(user);
+        }
+
+        [HttpGet]
+        public JsonResult GetProAddress()
+        {
+
+            int? Id = HttpContext.Session.GetInt32("userId");
+            if (Id == null)
+            {
+                Id = Convert.ToInt32(Request.Cookies["userId"]);
+            }
 
             UserAddress Addresses = _helperlandContext.UserAddresses.FirstOrDefault(x => x.UserId == Id);
+            return new JsonResult(Addresses);
 
-            ProviderDetail sPSettingsDTO = new ProviderDetail
-            {
-                user = User,
-                address = Addresses
-            };
-
-
-
-
-            return Json(sPSettingsDTO);
         }
 
 
@@ -607,9 +611,9 @@ namespace Help.Controllers
             sp.DateOfBirth = sPSettings.user.DateOfBirth;
             sp.NationalityId = sPSettings.user.NationalityId;
             sp.Gender = sPSettings.user.Gender;
-            //sp.UserProfilePicture = sPSettings.user.UserProfilePicture;
+            sp.UserProfilePicture = sPSettings.user.UserProfilePicture;
             sp.ModifiedDate = DateTime.Now;
-            sp.ModifiedBy = 1;
+            sp.ModifiedBy = 123;
 
 
             var userresult = _helperlandContext.Users.Update(sp);
@@ -959,10 +963,6 @@ namespace Help.Controllers
             if (conflict != -1)
             {
 
-
-
-
-
                 return conflict.ToString();
 
             }
@@ -996,9 +996,6 @@ namespace Help.Controllers
 
 
             string conflictmsg = "This Request is conflicting with Service ID: " + sr.ServiceRequestId + " on :" + sr.ServiceStartDate;
-
-
-
 
             return conflictmsg;
 

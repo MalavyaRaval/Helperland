@@ -35,7 +35,6 @@ body {
     color: white;
     background-color: #29626D;
     border: solid 1px white;
-    text-decoration: none;
 }
 .price-btn{
     background-color: transparent;
@@ -276,6 +275,11 @@ padding-top: +20px;
 margin-left: -25px;
 }
 
+
+.error {  
+    color: red;   
+    font-size: 12px;
+  }  
 
 
 
