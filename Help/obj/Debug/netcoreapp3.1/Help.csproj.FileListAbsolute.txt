@@ -104,3 +104,4 @@ C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\Pro
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminDashboard.cshtml.g.cs
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ServiceRequestPage.cshtml.g.cs
 C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\Admin\UserManagePage.cshtml.g.cs
+C:\Users\user\source\repos\Help\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\ProviderSchedule.cshtml.g.cs

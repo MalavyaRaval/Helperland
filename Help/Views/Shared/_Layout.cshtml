@@ -93,6 +93,17 @@
         </text>
     }
 
+    @if (TempData["ContactForm"] != null)
+    {
+        <text>
+            <script>
+            $(document).ready(function () {
+               alert('@TempData["ContactForm"]');
+            });
+            </script>
+        </text>
+    }
+
     @RenderSection("Scripts", required: false)
 
 

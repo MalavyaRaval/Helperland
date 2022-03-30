@@ -59,21 +59,28 @@ namespace Help.Controllers
         [HttpPost]
         public IActionResult Contact(ContactU contactUs)
         {
-
-            if (contactUs.Attach != null)
+            if (ModelState.IsValid)
             {
-                string folder = "ContactFile/";
-                folder += Guid.NewGuid().ToString() + "_" + contactUs.Attach.FileName;
-                string serverFolder = Path.Combine(_webHostEnv.WebRootPath, folder);
-                contactUs.Attach.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
-                contactUs.FileName = folder;
-                contactUs.UploadFileName = contactUs.Attach.FileName;
+                if (contactUs.Attach != null)
+                {
+                    string folder = "ContactFile/";
+                    folder += Guid.NewGuid().ToString() + "_" + contactUs.Attach.FileName;
+                    string serverFolder = Path.Combine(_webHostEnv.WebRootPath, folder);
+                    contactUs.Attach.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                    contactUs.FileName = folder;
+                    contactUs.UploadFileName = contactUs.Attach.FileName;
+                }
+
+                contactUs.CreatedOn = DateTime.Now;
+                _helpContext.ContactUs.Add(contactUs);
+                _helpContext.SaveChanges();
+
+                TempData["ContactForm"] = "Form Submitted, Thank You.";
+                return RedirectToAction("Index");
             }
 
-            contactUs.CreatedOn = DateTime.Now;
-            _helpContext.ContactUs.Add(contactUs);
-            _helpContext.SaveChanges();
-            return RedirectToAction("Index");
+
+            return PartialView();
         }
 
 

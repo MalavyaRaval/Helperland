@@ -290,7 +290,7 @@ $(document).on('click', '#ServEditUpdateBtn', function () {
 
     data.address.addressLine2 = document.getElementById('ServiceEditHouse').value;
     data.address.postalCode = document.getElementById('ServiceEditZipCode').value;
-    //data.address.city = document.getElementById('AdminEditPopupCity').value;
+    data.address.city = document.getElementById('ServiceEditCity').value;
     //data.address.state = state;
     var temp = document.getElementById("ServiceEditDate").value;
     data.date = temp + " " + document.getElementById("ServiceEditTime").value;
@@ -587,3 +587,132 @@ function getCityFromPostalCode(zip, Id) {
     });
 }
 
+$("#ServiceEditZipCode").keyup(function () {
+    if ($("#ServiceEditZipCode").val().length == 6) {
+        getCityFromPostalCode($("#ServiceEditZipCode").val(), "#ServiceEditCity");
+    }
+});
+
+$("#ServiceEditInvoiceZipCode").keyup(function () {
+    if ($("#ServiceEditInvoiceZipCode").val().length == 6) {
+        getCityFromPostalCode($("#ServiceEditInvoiceZipCode").val(), "#ServiceEditInvoiceCity");
+    }
+});
+
+
+
+
+
+
+
+
+
+$(document).on('click', '.ServRefund', function () {
+
+    $("#RefundModelBtn").click();
+    serviceReqId = this.getAttribute("data-value");
+
+    $("#RefundPercentage").val(0);
+    $("#WhyRefund").val("");
+    $("#CallNotes").val("");
+    $("#CalculateAmount").val("");
+
+    var data = {};
+    data.ServiceRequestId = parseInt(serviceReqId);
+
+    $.ajax({
+        type: 'GET',
+        url: '/Admin/GetAdminRefundData',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        data: data,
+        success: function (result) {
+
+            if (result.refundAmount == null) {
+                $("#RefundSubmit").removeAttr('disabled');
+                $("#RefundPercentage").removeAttr('disabled');
+                result.refundAmount = 0;
+            } else {
+
+                alert("Refund has been already initiated.");
+
+                $("#RefundSubmit").attr('disabled', 'disabled');
+                $("#RefundPercentage").attr('disabled', 'disabled');
+
+            }
+
+
+
+            $("#PaidAmount").html(result.totalCost);
+            $("#RefundAmount").html(result.refundAmount);
+            $("#BalanceAmount").html(result.totalCost - result.refundAmount);
+
+
+
+
+        },
+        error: function () {
+            alert("error");
+        }
+    });
+
+
+});
+
+
+
+$('#RefundPercentage').on('change keyup', function () {
+    var paidAmount = $(this).val();
+    paidAmount = parseFloat(paidAmount).toFixed(2);
+
+    if (paidAmount >= 0 && paidAmount <= 100) {
+        var totalprice = $("#PaidAmount").html();
+        refundAmount = parseFloat((totalprice * paidAmount) / 100).toFixed(2);
+        balanceAmount = parseFloat(totalprice - refundAmount).toFixed(2);
+        $("#CalculateAmount").val(refundAmount);
+        $("#RefundAmount").html(refundAmount);
+        $("#BalanceAmount").html(balanceAmount);
+        $("#RefundSubmit").removeAttr('disabled');
+    } else {
+        $("#CalculateAmount").val("Invalid");
+        $("#RefundAmount").html("Invalid");
+        $("#BalanceAmount").html("Invalid");
+
+        $("#RefundSubmit").attr('disabled', 'disabled');
+    }
+
+});
+
+
+$("#RefundSubmit").on('click', function () {
+    var data = {};
+    data.ServiceRequestId = parseInt(serviceReqId);
+    data.RefundedAmount = parseFloat($("#CalculateAmount").val());
+
+    $.ajax({
+        type: 'GET',
+        url: '/Admin/AdminRefundUpdate',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        data: data,
+        success: function (result) {
+
+            if (result == "true") {
+
+                alert("Refund initiated, please wait...");
+                $("#RefundSubmit").attr('disabled', 'disabled');
+                $("#RefundPercentage").attr('disabled', 'disabled');
+
+                $("#RefundModel").modal("hide");
+
+            }
+            else {
+
+                alert("Something went wrong, please try again !");
+
+            }
+
+        },
+        error: function () {
+            alert("error");
+        }
+    });
+});

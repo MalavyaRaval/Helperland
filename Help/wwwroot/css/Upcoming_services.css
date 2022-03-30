@@ -232,7 +232,6 @@ tbody tr{
 
 .NewServControls{
     display: inline-flex;
-   padding-left: 32px;
    column-gap: 30px;
    padding-bottom: 15px;
    color: #646464;
@@ -268,7 +267,7 @@ tbody tr{
 
 .ServHistoryControls{
     display: flex;
-   padding-left: 32px;
+   padding-left: 15px;
    padding-bottom: 15px;
    color: #646464;
    justify-content: space-between;
@@ -506,48 +505,25 @@ tbody tr{
 
 
 
-footer{
-    background-color: #111111;
-    width: 100%;
-    color: white;
-    min-height: 195px;
-  }
-  .footer-logo{
-      width: 120px;
-      height: 92px;
-  }
-footer .container a {
-    text-decoration: none;
-    color: #F1F1F1;
-    font-size: 14px;
-  }
-.foot_menu{
-    padding-top: 20px;
-    max-width: 1350px;
-  }
-.icons{
-padding-top: +15px;
+#MyRating p {
+    margin-top: 0;
+    margin-bottom: 0rem;
 }
-.fimg1 {
-    width: 9px;
-    height: 18px;
-    margin-right: 20px;
-  }
-.fimg2 {
-    width: 20px;
-    height: 20px;
-  }
-  
-.term_c{
-    color: #9BA0A3;
-    font-size: 14px;
-  }
-.term_c a{
-      text-decoration: none;
-      color: #9BA0A3;
-  }
-.foot_menulink{
-padding-top: +20px;
+
+
+
+#MyRating hr {
+    margin-top: 2%;
+    width: 95%;
+    margin-left: 5px;
+}
+
+
+
+.rating-row {
+    border: 1px solid black;
+    margin: 3%;
+    padding: 1%;
 }
 
 
@@ -588,29 +564,29 @@ padding-top: +20px;
         width: 60%;
         height: auto;
     }
-    
 
 
 
 
 
-     
-    .UpcomingServiceTable{
+
+
+    .UpcomingServiceTable {
         border: none;
-        margin-left: 0%;
+        margin-left: 4% !important;
+        width: 100% !important;
     }
     .UpcomingServiceTable thead{
         display: none;
     }
     .UpcomingServiceTable, .UpcomingServiceTable tbody, .UpcomingServiceTable tr, .UpcomingServiceTable td{
         display: block;
-        width: 90%;
         height: auto;
         font-size: 12px !important;
-    } 
-    .UpcomingServiceTable tbody, .UpcomingServiceTable tr, .UpcomingServiceTable td{
-        width: 100% !important;
     }
+        .UpcomingServiceTable tbody, .UpcomingServiceTable tr, .UpcomingServiceTable td {
+            width: 91% !important;
+        }
     .UpcomingServiceTable tbody tr td{
         text-align: end;
         padding-right: 2%;
@@ -661,22 +637,22 @@ padding-top: +20px;
 
 
 
-    
-    .NewServTable{
+
+    .NewServTable {
         border: none;
-        margin-left: 0%;
+        margin-left: 4% !important;
+        width: 100% !important;
     }
     .NewServTable thead{
         display: none;
     }
     .NewServTable, .NewServTable tbody, .NewServTable tr, .NewServTable td{
         display: block;
-        width: 90%;
         height: auto;
         font-size: 12px !important;
     } 
     .NewServTable tbody, .NewServTable tr, .NewServTable td{
-        width: 100% !important;
+        width: 91% !important;
     }
     .NewServTable tbody tr td{
         text-align: end;
@@ -716,9 +692,9 @@ padding-top: +20px;
         text-align: center !important;
         padding: 7px;
     }
-    .NS-TimeConf{
-        padding-top: 10px;
-        padding-bottom: 30px;
+    .NS-TimeConf {
+        padding-top: 30px;
+        padding-bottom: 30px !important;
     }
     
     .NewServControls{
@@ -741,29 +717,31 @@ padding-top: +20px;
     }
     
 
+    #NewServTable_length label{
+        padding-right: 50px !important;
+    }
 
 
 
 
 
 
-
-    .ServHistoryTable{
+    .ServHistoryTable {
         border: none;
-        margin-left: 0%;
+        margin-left: 4% !important;
+        width: 100% !important;
     }
     .ServHistoryTable thead{
         display: none;
     }
     .ServHistoryTable, .ServHistoryTable tbody, .ServHistoryTable tr, .ServHistoryTable td{
         display: block;
-        width: 90%;
         height: auto;
         font-size: 12px !important;
-    } 
-    .ServHistoryTable tbody, .ServHistoryTable tr, .ServHistoryTable td{
-        width: 100% !important;
     }
+        .ServHistoryTable tbody, .ServHistoryTable tr, .ServHistoryTable td {
+            width: 91% !important;
+        }
     .ServHistoryTable tbody tr td{
         text-align: end;
         padding-right: 2%;
@@ -806,6 +784,17 @@ padding-top: +20px;
     }
     .BlockCustCard{
         padding-top: 20px;
+    }
+
+
+    #MyRating{
+        margin-left: 0%;
+    }
+    #RatingList {
+        margin-left: -10%;
+    }
+    .page-control{
+        display: none;
     }
 }
 
@@ -819,50 +808,28 @@ padding-top: +20px;
     }
 
 
-    .foot_menulink a{
-        padding-top: +5px;
-        padding-bottom: +5px;
-    }
-    .fimg1{
-        margin-left: +5px;
-    }
 
-    .foot_menu{
-        flex-direction: column;
-    }
-    .foot_menulink{
-        flex-direction: column;
-    
-    }
-    .foot_menulink a{
-        padding-top: +5px;
-        
-    }
-    .footer-logo{
-        width: 25%;
-        height: auto;
-    }
-    
 
-    
 
-     
-    .UpcomingServiceTable{
+
+
+
+    .UpcomingServiceTable {
         border: none;
-        margin-left: 0%;
+        margin-left: 4% !important;
+        width: 100% !important;
     }
     .UpcomingServiceTable thead{
         display: none;
     }
     .UpcomingServiceTable, .UpcomingServiceTable tbody, .UpcomingServiceTable tr, .UpcomingServiceTable td{
         display: block;
-        width: 90%;
         height: auto;
         font-size: 12px !important;
-    } 
-    .UpcomingServiceTable tbody, .UpcomingServiceTable tr, .UpcomingServiceTable td{
-        width: 100% !important;
     }
+        .UpcomingServiceTable tbody, .UpcomingServiceTable tr, .UpcomingServiceTable td {
+            width: 93% !important;
+        }
     .UpcomingServiceTable tbody tr td{
         text-align: end;
         padding-right: 2%;
@@ -916,94 +883,112 @@ padding-top: +20px;
 
 
 
-    
-    .NewServTable{
+
+    .NewServTable {
         border: none;
-        margin-left: 0%;
-    }
-    .NewServTable thead{
-        display: none;
-    }
-    .NewServTable, .NewServTable tbody, .NewServTable tr, .NewServTable td{
-        display: block;
-        width: 90%;
-        height: auto;
-        font-size: 14px !important;
-    } 
-    .NewServTable tbody, .NewServTable tr, .NewServTable td{
+        margin-left: 4% !important;
         width: 100% !important;
     }
-    .NewServTable tbody tr td{
-        text-align: end;
-        padding-right: 2%;
-        position: relative;
-        border-bottom: solid 1px #9BA0A3;
-    }
-    .NewServTable td::before{
-        content: attr(data-label);
-        position: absolute;
-        left: 1%;
-        padding-top: 1%;
-    }
+
+        .NewServTable thead {
+            display: none;
+        }
+
+        .NewServTable, .NewServTable tbody, .NewServTable tr, .NewServTable td {
+            display: block;
+            height: auto;
+            font-size: 12px !important;
+        }
+
+            .NewServTable tbody, .NewServTable tr, .NewServTable td {
+                width: 93% !important;
+            }
+
+                .NewServTable tbody tr td {
+                    text-align: end;
+                    padding-right: 2%;
+                    position: relative;
+                    border-bottom: solid 1px #9BA0A3;
+                }
+
+                .NewServTable td::before {
+                    content: attr(data-label);
+                    position: absolute;
+                    left: 1%;
+                    padding-top: 1%;
+                }
 
 
 
-    .NewServTable tr{
-        border: solid 1px #9BA0A3;
-        border-bottom: none;
-        margin-bottom: 40px;
-    }
+            .NewServTable tr {
+                border: solid 1px #9BA0A3;
+                border-bottom: none;
+                margin-bottom: 40px;
+            }
 
-    .NS-ServId{
+    .NS-ServId {
         padding: 15px;
     }
-    .NS-Payment{
+
+    .NS-Payment {
         padding: 10px;
     }
-    .nsPaySpan{
-        font-size: 16px;
+
+    .nsPaySpan {
+        font-size: 14px;
         font-weight: 600;
     }
-    .NS-ServDateSpan{
+
+    .NS-ServDateSpan {
         padding: 5px;
     }
-    .nsTableAcceptbtn{
+
+    .nsTableAcceptbtn {
         text-align: center !important;
         padding: 7px;
     }
-    .NS-TimeConf{
-        padding-top: 5px;
-        padding-bottom: 30px;
+
+    .NS-TimeConf {
+        padding-top: 30px;
+        padding-bottom: 30px !important;
     }
-    .NewServControls{
+
+    .NewServControls {
         display: inline-flex;
-       padding-left: 5px;
-       column-gap: 20px;
-       padding-bottom: 15px;
-       color: #646464;
+        padding-left: 5px;
+        column-gap: 5px;
+        padding-bottom: 15px;
+        color: #646464;
     }
-    .NewServSelect label, .NewServCheckbox label{
+
+    .NewServSelect label, .NewServCheckbox label {
         font-weight: 600;
     }
-    #PetsCheck{
+
+    #PetsCheck {
         width: 15px;
         height: 15px;
         margin-right: 2px;
-        
     }
-    .NewServCheckbox{
+
+    .NewServCheckbox {
         display: inline-flex;
     }
 
 
+    #NewServTable_length label {
+        padding-right: 50px !important;
+    }
 
 
 
-    
 
-    .ServHistoryTable{
+
+
+    .ServHistoryTable {
         border: none;
-        margin-left: 0%;
+        margin-left: 4% !important;
+        width: 100% !important;
     }
     .ServHistoryTable thead{
         display: none;
@@ -1013,10 +998,10 @@ padding-top: +20px;
         width: 90%;
         height: auto;
         font-size: 12px !important;
-    } 
-    .ServHistoryTable tbody, .ServHistoryTable tr, .ServHistoryTable td{
-        width: 100% !important;
     }
+        .ServHistoryTable tbody, .ServHistoryTable tr, .ServHistoryTable td {
+            width: 93% !important;
+        }
     .ServHistoryTable tbody tr td{
         text-align: end;
         padding-right: 2%;
@@ -1059,7 +1044,18 @@ padding-top: +20px;
     .BlockCustCard{
         padding-top: 20px;
     }
-    
+
+    #MyRating {
+        margin-left: 0%;
+    }
+
+    #RatingList {
+        margin-left: -10%;
+    }
+
+    .page-control {
+        display: none;
+    }
 }
 @media screen and (min-width: 427px) and (max-width: 769px){
     .navbar{
@@ -1069,39 +1065,28 @@ padding-top: +20px;
         padding-top: +5px;
     }
 
-    .foot_menulink a{
-        padding-top: +5px;
-        padding-bottom: +5px;
-    }
-    .fimg1{
-        margin-left: +5px;
-        margin-bottom: +5px;
-    }
-    .footer-logo{
-        width: 90px;
-        height: auto;
-    }
 
 
-    
 
-     
-    .UpcomingServiceTable{
+
+
+
+    .UpcomingServiceTable {
         border: none;
-        margin-left: 0%;
+        margin-left: 4% !important;
+        width: 100% !important;
     }
     .UpcomingServiceTable thead{
         display: none;
     }
     .UpcomingServiceTable, .UpcomingServiceTable tbody, .UpcomingServiceTable tr, .UpcomingServiceTable td{
         display: block;
-        width: 95%;
         height: auto;
         font-size: 18px !important;
-    } 
-    .UpcomingServiceTable tbody, .UpcomingServiceTable tr, .UpcomingServiceTable td{
-        width: 100% !important;
     }
+        .UpcomingServiceTable tbody, .UpcomingServiceTable tr, .UpcomingServiceTable td {
+            width: 96% !important;
+        }
     .UpcomingServiceTable tbody tr td{
         text-align: end;
         padding-right: 2%;
@@ -1153,88 +1138,125 @@ padding-top: +20px;
 
 
 
-    
 
-    
-    .NewServTable{
+
+
+    .NewServTable {
         border: none;
-        margin-left: 2%;
-    }
-    .NewServTable thead{
-        display: none;
-    }
-    .NewServTable, .NewServTable tbody, .NewServTable tr, .NewServTable td{
-        display: block;
-        width: 90%;
-        height: auto;
-        font-size: 16px !important;
-    } 
-    .NewServTable tbody, .NewServTable tr, .NewServTable td{
+        margin-left: 4% !important;
         width: 100% !important;
     }
-    .NewServTable tbody tr td{
-        text-align: end;
-        padding-right: 2%;
-        position: relative;
-        border-bottom: solid 1px #9BA0A3;
-    }
-    .NewServTable td::before{
-        content: attr(data-label);
-        position: absolute;
-        left: 1%;
-        padding-top: 0%;
-    }
+
+        .NewServTable thead {
+            display: none;
+        }
+
+        .NewServTable, .NewServTable tbody, .NewServTable tr, .NewServTable td {
+            display: block;
+            height: auto;
+            font-size: 12px !important;
+        }
+
+            .NewServTable tbody, .NewServTable tr, .NewServTable td {
+                width: 96% !important;
+            }
+
+                .NewServTable tbody tr td {
+                    text-align: end;
+                    padding-right: 2%;
+                    position: relative;
+                    border-bottom: solid 1px #9BA0A3;
+                }
+
+                .NewServTable td::before {
+                    content: attr(data-label);
+                    position: absolute;
+                    left: 1%;
+                    padding-top: 1%;
+                }
 
 
 
-    .NewServTable tr{
-        border: solid 1px #9BA0A3;
-        border-bottom: none;
-        margin-bottom: 40px;
-    }
+            .NewServTable tr {
+                border: solid 1px #9BA0A3;
+                border-bottom: none;
+                margin-bottom: 40px;
+            }
 
-    .NS-ServId{
+    .NS-ServId {
         padding: 15px;
     }
-    .NS-Payment{
+
+    .NS-Payment {
         padding: 10px;
     }
-    .nsPaySpan{
-        font-size: 18px;
+
+    .nsPaySpan {
+        font-size: 14px;
         font-weight: 600;
     }
-    .NS-ServDateSpan{
+
+    .NS-ServDateSpan {
         padding: 5px;
     }
-    .nsTableAcceptbtn{
+
+    .nsTableAcceptbtn {
         text-align: center !important;
         padding: 7px;
     }
-    .NS-TimeConf{
-        padding-top: 5px;
-        padding-bottom: 30px;
+
+    .NS-TimeConf {
+        padding-top: 30px;
+        padding-bottom: 30px !important;
+    }
+
+    .NewServControls {
+        display: inline-flex;
+        padding-left: 5px;
+        column-gap: 5px;
+        padding-bottom: 15px;
+        color: #646464;
+    }
+
+    .NewServSelect label, .NewServCheckbox label {
+        font-weight: 600;
+    }
+
+    #PetsCheck {
+        width: 15px;
+        height: 15px;
+        margin-right: 2px;
+    }
+
+    .NewServCheckbox {
+        display: inline-flex;
+    }
+
+
+    #NewServTable_length label {
+        padding-right: 50px !important;
     }
 
 
 
-    
 
-    .ServHistoryTable{
+
+    .ServHistoryTable {
         border: none;
-        margin-left: 0%;
+        margin-left: 4% !important;
+        width: 100% !important;
     }
     .ServHistoryTable thead{
         display: none;
     }
     .ServHistoryTable, .ServHistoryTable tbody, .ServHistoryTable tr, .ServHistoryTable td{
         display: block;
-        width: 95%;
         height: auto;
         font-size: 16px !important;
-    } 
-    .ServHistoryTable tbody, .ServHistoryTable tr, .ServHistoryTable td{
-        width: 100% !important;
     }
+        .ServHistoryTable tbody, .ServHistoryTable tr, .ServHistoryTable td {
+            width: 96% !important;
+        }
     .ServHistoryTable tbody tr td{
         text-align: end;
         padding-right: 2%;
@@ -1274,6 +1296,19 @@ padding-top: +20px;
     .BlockCustCard{
         padding-top: 20px;
     }
+
+
+    #MyRating {
+        margin-left: 0%;
+    }
+
+    #RatingList {
+        margin-left: -5%;
+    }
+
+    .page-control {
+        display: none;
+    }
     }
     
     @media screen and (min-width: 770px) and (max-width: 991px){
@@ -1283,14 +1318,15 @@ padding-top: +20px;
         .navbar-collapse{
             padding-top: +5px;
         }
-    
 
-        
-     
-    .UpcomingServiceTable{
-        border: none;
-        margin-left: 0%;
-    }
+
+
+
+        .UpcomingServiceTable {
+            border: none;
+            margin-left: 4% !important;
+            width: 100% !important;
+        }
     .UpcomingServiceTable thead{
         display: none;
     }
@@ -1299,10 +1335,10 @@ padding-top: +20px;
         width: 100%;
         height: auto;
         font-size: 18px !important;
-    } 
-    .UpcomingServiceTable tbody, .UpcomingServiceTable tr, .UpcomingServiceTable td{
-        width: 100% !important;
     }
+        .UpcomingServiceTable tbody, .UpcomingServiceTable tr, .UpcomingServiceTable td {
+            width: 97% !important;
+        }
     .UpcomingServiceTable tbody tr td{
         text-align: end;
         padding-right: 2%;
@@ -1352,88 +1388,125 @@ padding-top: +20px;
 
 
 
-    
-    
-    .NewServTable{
-        border: none;
-        margin-left: 0%;
-    }
-    .NewServTable thead{
-        display: none;
-    }
-    .NewServTable, .NewServTable tbody, .NewServTable tr, .NewServTable td{
-        display: block;
-        width: 100%;
-        height: auto;
-        font-size: 16px !important;
-    } 
-    .NewServTable tbody, .NewServTable tr, .NewServTable td{
-        width: 100% !important;
-    }
-    .NewServTable tbody tr td{
-        text-align: end;
-        padding-right: 2%;
-        position: relative;
-        border-bottom: solid 1px #9BA0A3;
-    }
-    .NewServTable td::before{
-        content: attr(data-label);
-        position: absolute;
-        left: 1%;
-        padding-top: 0%;
-    }
+
+
+        .NewServTable {
+            border: none;
+            margin-left: 4% !important;
+            width: 100% !important;
+        }
+
+            .NewServTable thead {
+                display: none;
+            }
+
+            .NewServTable, .NewServTable tbody, .NewServTable tr, .NewServTable td {
+                display: block;
+                height: auto;
+                font-size: 12px !important;
+            }
+
+                .NewServTable tbody, .NewServTable tr, .NewServTable td {
+                    width: 97% !important;
+                }
+
+                    .NewServTable tbody tr td {
+                        text-align: end;
+                        padding-right: 2%;
+                        position: relative;
+                        border-bottom: solid 1px #9BA0A3;
+                    }
+
+                    .NewServTable td::before {
+                        content: attr(data-label);
+                        position: absolute;
+                        left: 1%;
+                        padding-top: 1%;
+                    }
 
 
 
-    .NewServTable tr{
-        border: solid 1px #9BA0A3;
-        border-bottom: none;
-        margin-bottom: 40px;
-    }
+                .NewServTable tr {
+                    border: solid 1px #9BA0A3;
+                    border-bottom: none;
+                    margin-bottom: 40px;
+                }
 
-    .NS-ServId{
-        padding: 15px;
-    }
-    .NS-Payment{
-        padding: 10px;
-    }
-    .nsPaySpan{
-        font-size: 18px;
-        font-weight: 600;
-    }
-    .NS-ServDateSpan{
-        padding: 5px;
-    }
-    .nsTableAcceptbtn{
-        text-align: center !important;
-        padding: 7px;
-    }
-    .NS-TimeConf{
-        padding-top: 5px;
-        padding-bottom: 30px;
-    }
+        .NS-ServId {
+            padding: 15px;
+        }
+
+        .NS-Payment {
+            padding: 10px;
+        }
+
+        .nsPaySpan {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .NS-ServDateSpan {
+            padding: 5px;
+        }
+
+        .nsTableAcceptbtn {
+            text-align: center !important;
+            padding: 7px;
+        }
+
+        .NS-TimeConf {
+            padding-top: 30px;
+            padding-bottom: 30px !important;
+        }
+
+        .NewServControls {
+            display: inline-flex;
+            padding-left: 5px;
+            column-gap: 5px;
+            padding-bottom: 15px;
+            color: #646464;
+        }
+
+        .NewServSelect label, .NewServCheckbox label {
+            font-weight: 600;
+        }
+
+        #PetsCheck {
+            width: 15px;
+            height: 15px;
+            margin-right: 2px;
+        }
+
+        .NewServCheckbox {
+            display: inline-flex;
+        }
+
+
+        #NewServTable_length label {
+            padding-right: 50px !important;
+        }
 
 
 
 
 
-    
-    .ServHistoryTable{
-        border: none;
-        margin-left: 0%;
-    }
+
+        .ServHistoryTable {
+            border: none;
+            margin-left: 4% !important;
+            width: 100% !important;
+        }
     .ServHistoryTable thead{
         display: none;
     }
     .ServHistoryTable, .ServHistoryTable tbody, .ServHistoryTable tr, .ServHistoryTable td{
         display: block;
-        width: 100%;
         height: auto;
         font-size: 16px !important;
-    } 
-    .ServHistoryTable tbody, .ServHistoryTable tr, .ServHistoryTable td{
-        width: 100% !important;
     }
+        .ServHistoryTable tbody, .ServHistoryTable tr, .ServHistoryTable td {
+            width: 97% !important;
+        }
     .ServHistoryTable tbody tr td{
         text-align: end;
         padding-right: 2%;

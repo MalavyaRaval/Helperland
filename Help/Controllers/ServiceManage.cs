@@ -105,8 +105,8 @@ namespace Help.Controllers
 
 
             string postalcode = obj.ZipCode;
-           // Console.WriteLine(obj.ZipCode);
-            var table = _helperlandContext.UserAddresses.Where(x => x.UserId == Id && x.PostalCode == postalcode).ToList();
+            // Console.WriteLine(obj.ZipCode);
+            List<UserAddress> table = _helperlandContext.UserAddresses.Where(x => x.UserId == Id && x.PostalCode == postalcode && x.IsDeleted == false).ToList();
            // Console.WriteLine(table.ToString());
 
             foreach (var add in table)
@@ -151,25 +151,27 @@ namespace Help.Controllers
             }
             /* Console.WriteLine("Inside Addnew address 2");
              Console.WriteLine(Id);*/
-            
-            useradd.UserId = Id;
-            useradd.IsDefault = false;
-            useradd.IsDeleted = false;
-            User user = _helperlandContext.Users.Where(x => x.UserId == Id).FirstOrDefault();
-            useradd.Email = user.Email;
-            var result = _helperlandContext.UserAddresses.Add(useradd);
-            //Console.WriteLine("Inside Addnew address 3");
-            _helperlandContext.SaveChanges();
-
-            //Console.WriteLine("Inside Addnew address 4");
-            if (result != null)
+            if (ModelState.IsValid)
             {
-                return Ok(Json("true"));
+                useradd.UserId = Id;
+                useradd.IsDefault = false;
+                useradd.IsDeleted = false;
+                User user = _helperlandContext.Users.Where(x => x.UserId == Id).FirstOrDefault();
+                useradd.Email = user.Email;
+                var result = _helperlandContext.UserAddresses.Add(useradd);
+                //Console.WriteLine("Inside Addnew address 3");
+                _helperlandContext.SaveChanges();
+
+                //Console.WriteLine("Inside Addnew address 4");
+                if (result != null)
+                {
+                    return Ok(Json("true"));
+                }
             }
-            
+
             return Ok(Json("false"));
+
             
-           
         }
 
 

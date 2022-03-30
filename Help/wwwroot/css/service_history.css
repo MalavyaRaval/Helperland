@@ -371,36 +371,11 @@ tbody tr{
     color: #646464;
 }
 
-
-
-#rescheduleBtn{
-    padding: 5px 10px;
-    margin-right: +2px;
-    background-color: #1D7A8C;
-    color: white;
-    border: solid 1px #1D7A8C;
-}
-#cancelBtn{
-    padding: 5px 8px;
-    background-color: #e64242;
-    color: white;
-    border: solid 1px #e64242;
-}
-
-#rescheduleBtn:hover{
-    background-color: #fff;
-    color: #1D7A8C;
-}
-#cancelBtn:hover{
-    background-color: #fff;
-    color: #e64242;
-}
-
 /***************************************************/
 
 
 
-/*Page Control*/
+/*Page Control
 .page-control{
     display:flex;
   justify-content:space-between;
@@ -449,7 +424,7 @@ tbody tr{
     background-color: #1D7A8C;
     color: white;
 }
-
+*/
 
 
 
@@ -660,70 +635,79 @@ tbody tr{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-footer{
-    background-color: #111111;
-    width: 100%;
+.customerReschedule {
+    padding: 5px 10px;
+    margin-right: +2px;
+    background-color: #1D7A8C;
     color: white;
-    min-height: 195px;
-    margin-bottom: 0%;
-  }
-  .footer-logo{
-      width: 120px;
-      height: 92px;
-  }
-footer .container a {
-    text-decoration: none;
-    color: #F1F1F1;
-    font-size: 14px;
-  }
-.foot_menu{
-    padding-top: 20px;
-    max-width: 1350px;
-  }
-.icons{
-padding-top: +15px;
+    border: solid 1px #1D7A8C;
 }
-.fimg1 {
-    width: 9px;
-    height: 18px;
-    margin-right: 20px;
-  }
-.fimg2 {
-    width: 20px;
-    height: 20px;
-  }
-  
-.term_c{
-    color: #9BA0A3;
-    font-size: 14px;
-  }
-.term_c a{
-      text-decoration: none;
-      color: #9BA0A3;
-  }
-.foot_menulink{
-padding-top: +20px;
+
+.customerCancel {
+    padding: 5px 8px;
+    background-color: #e64242;
+    color: white;
+    border: solid 1px #e64242;
+}
+
+.customerReschedule:hover {
+    background-color: #fff;
+    color: #1D7A8C;
+}
+
+.customerCancel:hover {
+    background-color: #fff;
+    color: #e64242;
+}
+
+
+.DashModalAmount {
+    font-size: 20px;
+    color: #2e8ca6;
+}
+.ModalBold{
+    font-weight: 600;
 }
 
 
 
+.new-status {
+    background-color: #e2d51b;
+    color: white !important;
+    width: 70px;
+    height: auto;
+    margin: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.pending-status {
+    background-color: #1FB6FF;
+    color: white !important;
+    width: 90px;
+    height: auto;
+    margin: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.completed-status {
+    background-color: #67B644;
+    color: white !important;
+    width: 90px;
+    height: auto;
+    margin: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.cancelled-status {
+    background-color: #FF6B6B;
+    color: white !important;
+    width: 90px;
+    height: auto;
+    margin: auto;
+}
 
 
 
@@ -731,9 +715,7 @@ padding-top: +20px;
 
 
 
-
- 
-@media screen and (max-width: 329px){
+@media screen and (max-width: 329px) {
     .navbar{
         height: auto;
     }
@@ -741,29 +723,7 @@ padding-top: +20px;
         width: 75%;
         height: auto;
     }
-    .foot_menulink a{
-        padding-top: +5px;
-        padding-bottom: +5px;
-    }
-    .fimg1{
-        margin-left: +5px;
-    }
-
-    .foot_menu{
-        flex-direction: column;
-    }
-    .foot_menulink{
-        flex-direction: column;
     
-    }
-    .foot_menulink a{
-        padding-top: +5px;
-        
-    }
-    .footer-logo{
-        width: 25%;
-        height: auto;
-    }
 
     .response-icon{
         margin-right: 0%;
@@ -826,25 +786,29 @@ padding-top: +20px;
 
     .servicedatediv{
         padding-top: 7px;
+        padding-right: 10px;
         
     }
-    .pro_info{
+    .pro_info {
         padding-bottom: 12px;
         padding-top: 12px;
+        padding-right: 10px;
     }
     .service-costdiv{
         padding-top: 15px;
         padding-bottom: 14px;
         padding-right: 20px !important;
     }
-    .statusmain{
+    .statusmain {
         padding-top: 20px;
         padding-bottom: 20px;
+        padding-right: 10px;
     }
-    .status{
+    .status {
         width: 25%;
         margin-right: 0;
         text-align: center;
+        padding-right: 10px;
     }
     .ratediv{
         padding-top: 15px;
@@ -858,10 +822,10 @@ padding-top: +20px;
         font-size: 12px !important;
         
     }
-    
-    .rate-button{
+
+    .rate-button {
         width: 22%;
-        font-size: 12px  !important;
+        font-size: 12px !important;
     } 
     .cap-icon{
       display: none;
@@ -919,9 +883,13 @@ padding-top: +20px;
         padding-bottom: 20px;
         
     }
-    .dashproInfo{
+    .dashdateDiv {
+        padding-right: 20px;
+    }
+    .dashproInfo {
         padding-bottom: 15px;
         padding-top: 15px;
+        padding-right: 20px;
     }
     .dashPayment{
         padding-top: 15px;
@@ -931,10 +899,11 @@ padding-top: +20px;
     .payAmount{
         font-size: 12px;
     }
-    .actiobBtns{
+    .actiobBtns {
         padding-top: 15px;
         padding-bottom: 15px;
         font-size: 8px;
+        padding-right: 20px;
     }
 
     .dashCapicon{
@@ -969,6 +938,20 @@ padding-top: +20px;
     }
 
 
+    .setting-tabs {
+        display: block;
+    }
+
+    .setting-tabs {
+        margin-left: 0% !important;
+    }
+
+    .setting-tab {
+        padding: 8px 10px;
+        padding-left: 0% !important;
+        margin-top: 7px;
+    }
+
 }
 
 @media screen and (min-width: 330px) and (max-width: 426px){
@@ -979,29 +962,7 @@ padding-top: +20px;
         width: 75%;
         height: auto;
     }
-    .foot_menulink a{
-        padding-top: +5px;
-        padding-bottom: +5px;
-    }
-    .fimg1{
-        margin-left: +5px;
-    }
-
-    .foot_menu{
-        flex-direction: column;
-    }
-    .foot_menulink{
-        flex-direction: column;
-    
-    }
-    .foot_menulink a{
-        padding-top: +5px;
-        
-    }
-    .footer-logo{
-        width: 25%;
-        height: auto;
-    }
+   
 
 
 
@@ -1040,22 +1001,24 @@ padding-top: +20px;
     }
 
 
-    .servicedatediv{
+    .servicedatediv {
         padding-top: 7px;
-        
+        padding-right: 15px;
     }
-    .pro_info{
+    .pro_info {
         padding-bottom: 12px;
         padding-top: 12px;
+        padding-right: 15px;
     }
     .service-costdiv{
         padding-top: 15px;
         padding-bottom: 14px;
         padding-right: 30px;
     }
-    .statusmain{
+    .statusmain {
         padding-top: 20px;
         padding-bottom: 20px;
+        padding-right: 15px;
     }
     .status{
         width: 25%;
@@ -1065,7 +1028,7 @@ padding-top: +20px;
     .ratediv{
         padding-top: 15px;
         padding-bottom: 15px;
-        padding-right: 7px;
+        padding-right: 10px;
     }
 
     .service-cost{
@@ -1074,7 +1037,7 @@ padding-top: +20px;
         font-size: 16px !important;
         
     }
-    .rate-button{
+    .rate-button {
         width: 22%;
         font-size: 16px !important;
     }
@@ -1135,9 +1098,13 @@ padding-top: +20px;
         padding-right: 30px;
         
     }
-    .dashproInfo{
+    .dashdateDiv {
+        padding-right: 20px;
+    }
+    .dashproInfo {
         padding-bottom: 15px;
         padding-top: 15px;
+        padding-right: 20px;
     }
     .dashPayment{
         padding-top: 15px;
@@ -1147,10 +1114,11 @@ padding-top: +20px;
     .payAmount{
         font-size: 18px;
     }
-    .actiobBtns{
+    .actiobBtns {
         padding-top: 15px;
         padding-bottom: 15px;
         font-size: 12px;
+        padding-right: 20px;
     }
 
     .dashCapicon{
@@ -1165,17 +1133,19 @@ padding-top: +20px;
     }
 
 
-    .my-setting {
+    .setting-tabs {
         display: block;
+        font-size: 8px;
     }
 
     .setting-tabs {
-        margin-left: 0%;
+        margin-left: 0% !important;
     }
 
     .setting-tab {
-        padding: 5px 10px;
+        padding: 10px 10px;
         padding-left: 0% !important;
+        margin-top: 8px;
     }
     
 }
@@ -1187,18 +1157,7 @@ padding-top: +20px;
         padding-top: +5px;
     }
 
-    .foot_menulink a{
-        padding-top: +5px;
-        padding-bottom: +5px;
-    }
-    .fimg1{
-        margin-left: +5px;
-        margin-bottom: +5px;
-    }
-    .footer-logo{
-        width: 90px;
-        height: auto;
-    }
+    
 
 
 
@@ -1239,22 +1198,24 @@ padding-top: +20px;
     }
 
 
-    .servicedatediv{
+    .servicedatediv {
         padding-top: 7px;
-        
+        padding-right: 15px;
     }
-    .pro_info{
+    .pro_info {
         padding-bottom: 12px;
         padding-top: 12px;
+        padding-right: 15px;
     }
     .service-costdiv{
         padding-top: 15px;
         padding-bottom: 14px;
         padding-right: 50px;
     }
-    .statusmain{
+    .statusmain {
         padding-top: 20px;
         padding-bottom: 20px;
+        padding-right: 15px;
     }
     .status{
         width: 25%;
@@ -1264,7 +1225,7 @@ padding-top: +20px;
     .ratediv{
         padding-top: 15px;
         padding-bottom: 15px;
-        padding-right: 7px;
+        padding-right: 15px;
     }
 
     .service-cost{
@@ -1273,7 +1234,7 @@ padding-top: +20px;
         font-size: 20px !important;
         
     }
-    .rate-button{
+    .rate-button {
         width: 22%;
         font-size: 18px !important;
     }
@@ -1286,7 +1247,15 @@ padding-top: +20px;
     .my-setting {
         width: 100%;
     }
+    .setting-tabs {
+        display: block;
+    }
 
+    .setting-tab {
+        padding: 15px 10px;
+        padding-left: 0% !important;
+        margin-top: 15px;
+    }
 
 
 
@@ -1336,9 +1305,13 @@ padding-top: +20px;
         padding-right: 35px;
         
     }
-    .dashproInfo{
+    .dashdateDiv {
+        padding-right: 20px;
+    }
+    .dashproInfo {
         padding-bottom: 15px;
         padding-top: 15px;
+        padding-right: 20px;
     }
     .dashPayment{
         padding-top: 15px;
@@ -1348,10 +1321,11 @@ padding-top: +20px;
     .payAmount{
         font-size: 24px;
     }
-    .actiobBtns{
+    .actiobBtns {
         padding-top: 15px;
         padding-bottom: 15px;
         font-size: 16px;
+        padding-right: 20px;
     }
 
 
@@ -1415,11 +1389,12 @@ padding-top: +20px;
 
     .servicedatediv{
         padding-top: 7px;
-        
+        padding-right: 15px;
     }
     .pro_info{
         padding-bottom: 12px;
         padding-top: 12px;
+        padding-right: 15px;
     }
     .service-costdiv{
         padding-top: 15px;
@@ -1429,6 +1404,7 @@ padding-top: +20px;
     .statusmain{
         padding-top: 20px;
         padding-bottom: 20px;
+        padding-right: 15px;
     }
     .status{
         width: 20%;
@@ -1506,10 +1482,14 @@ padding-top: +20px;
         padding-bottom: 20px;
         
     }
-    .dashproInfo{
-        padding-bottom: 15px;
-        padding-top: 15px;
-    }
+        .dashdateDiv {
+            padding-right: 20px;
+        }
+        .dashproInfo {
+            padding-bottom: 15px;
+            padding-top: 15px;
+            padding-right: 20px;
+        }
     .dashPayment{
         padding-top: 15px;
         padding-bottom: 20px;
@@ -1518,13 +1498,14 @@ padding-top: +20px;
     .payAmount{
         font-size: 28px;
     }
-    .actiobBtns{
-        padding-top: 15px;
-        padding-bottom: 15px;
-        font-size: 18px;
-    }
+        .actiobBtns {
+            padding-top: 15px;
+            padding-bottom: 15px;
+            font-size: 18px;
+            padding-right: 20px;
+        }
 
         
     
-    }
+}
         

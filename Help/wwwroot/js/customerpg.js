@@ -106,103 +106,29 @@ function settingTab3(){
 
 
 
+/************************************************************************* */
+
 var serviceRequestId = "";
-$(".dashbordTable").click(function (e) {
+
+$("#DashboardTable").click(function (e) {
 
 
     serviceRequestId = e.target.closest("tr").getAttribute("data-value");
 
-    if (e.target.id == "customerReschedule") {
-        document.getElementById("updateRequestId").value = e.target.value;
 
-    }
-    if (e.target.classList == "customerCancel") {
-        document.getElementById("CancelRequestId").value = e.target.value;
-    }
-
-    if (serviceRequestId != null && (e.target.classList != "customerCancel" && e.target.classList != "customerReschedule")) {
-
+    if (serviceRequestId != null) {
 
         document.getElementById("serviceReqdetailsbtn").click();
-        srId = serviceRequestId;
+
     }
-    console.log(e);
 });
+/* all details popup model */
 
+document.getElementById("serviceReqdetailsbtn").addEventListener("click", function () {
 
-document.getElementById("RescheduleUpdateBtn").addEventListener("click", function () {
-    //var serviceStartDate = document.getElementById("RescheduledDate").value;
-    //var serviceTime = document.getElementById("RescheduledTime").value;
-    //var serviceRequestId = document.getElementById("updateRequestId").value;
-    //console.log(serviceRequestId);
-    var data = {};
-    data.Date = document.getElementById("RescheduledDate").value;
-    data.startTime = document.getElementById("RescheduledTime").value;
-    data.serviceRequestId = document.getElementById("updateRequestId").value;
-
-    $.ajax({
-        type: 'POST',
-        url: '/UserPage/RescheduleService',
-        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-        data: data,
-        success: function (result) {
-            if (result.value == "true") {
-
-                alert("Service Rescheduled");
-                window.location.reload();
-            }
-            else {
-                alert("fail");
-            }
-        },
-        error: function () {
-            alert("error");
-        }
-    });
-});
-
-
-
-
-
-document.getElementById("cancelServBtn").addEventListener("click", function () {
-
-    var ServiceRequestId = document.getElementById("CancelRequestId").value;
-    var Comments = document.getElementById("canText").value;
-    var data = {};
-
-    data.serviceRequestId = ServiceRequestId;
-    data.comments = Comments;
-
-    $.ajax({
-        type: 'POST',
-        url: '/UserPage/CancelService',
-        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-        data: data,
-        success: function (result) {
-            if (result.value == "true") {
-                alert("Booking Cancelled");
-                window.location.reload();
-            }
-            else {
-                alert("fail");
-            }
-        },
-        error: function () {
-            alert("error");
-        }
-    });
+    getAllServiceDetails();
 
 });
-
-
-
-
-
-
-/*  for cancel status 1-created, 2-assigned, 3-complted 4-cancled  */
-
-
 
 
 
@@ -281,7 +207,7 @@ function showAllServiceRequestDetails(result) {
 
     document.getElementById("customerServiceHistorybtn").className = servicehistorybtn;
 
-    Status.innerHTML = " Status: <button disabled class=" + varStatus + ">" + varStatus + "</button > "
+    Status.innerHTML = " Status: <button disabled class=" + varStatus+"-status>" + varStatus + "</button > "
 
 
     if (result.cabinet == true) {
@@ -295,12 +221,12 @@ function showAllServiceRequestDetails(result) {
         extra.innerHTML += "<div class='extraElement'>  Inside Oven  </div> ";
     }
     if (result.fridge == true) {
-        extra.innerHTML += " <div class='extraElement'> Inside </div>  ";
+        extra.innerHTML += " <div class='extraElement'> Inside Fridge </div>  ";
     }
     if (result.window == true) {
         extra.innerHTML += "<div class='extraElement'>  Interior Window</div> ";
     }
-    amount.innerHTML = result.totalCost + " &euro;";
+    amount.innerHTML = "<span class='DashModalAmount'> &euro;" + result.totalCost + "</span>";
     address.innerHTML = result.address;
     phone.innerHTML = result.phoneNo;
     email.innerHTML = result.email;
@@ -311,9 +237,69 @@ function showAllServiceRequestDetails(result) {
 }
 
 
-document.getElementById("serviceReqdetailsbtn").addEventListener("click", function () {
 
-    getAllServiceDetails();
+
+
+
+
+document.getElementById("RescheduleUpdateBtn").addEventListener("click", function () {
+    var data = {};
+    data.Date = document.getElementById("RescheduledDate").value;
+    data.startTime = document.getElementById("RescheduledTime").value;
+    data.serviceRequestId = parseInt(serviceRequestId);
+
+    $.ajax({
+        type: 'POST',
+        url: '/UserPage/RescheduleService',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        data: data,
+        success: function (result) {
+            if (result.value == "true") {
+
+                alert("Service Rescheduled");
+                window.location.reload();
+            }
+            else {
+                alert("fail");
+            }
+        },
+        error: function () {
+            alert("error");
+        }
+    });
+});
+
+
+
+
+
+document.getElementById("cancelServBtn").addEventListener("click", function () {
+
+    var ServiceRequestId = parseInt(serviceRequestId);
+    var Comments = document.getElementById("canText").value;
+    var data = {};
+
+    data.serviceRequestId = ServiceRequestId;
+    data.comments = Comments;
+
+    $.ajax({
+        type: 'POST',
+        url: '/UserPage/CancelService',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        data: data,
+        success: function (result) {
+            if (result.value == "true") {
+                alert("Booking Cancelled");
+                window.location.reload();
+            }
+            else {
+                alert("fail");
+            }
+        },
+        error: function () {
+            alert("error");
+        }
+    });
 
 });
 
@@ -323,6 +309,222 @@ document.getElementById("serviceReqdetailsbtn").addEventListener("click", functi
 
 
 
+$("#HistoryTable").click(function (e) {
+    serviceRequestId = e.target.closest("tr").getAttribute("data-value");
+
+    if (serviceRequestId != null) {
+
+
+        document.getElementById("serviceReqdetailsbtn").click();
+
+    }
+});
+
+
+
+
+
+/* rating star hover */
+
+
+$(document).ready(function () {
+
+    $("#myRatingModal .modal-body .fa-star").css("color", "silver");
+    $("#myRatingModal .modal-body").hover(function () {
+        $(".ratingfortimearrival").hover(function () {
+
+            $("#ontime1").click(function () {
+                $("#ontime2,#ontime3,#ontime4,#ontime5").css("color", "silver");
+                $("#ontime1").css("color", "#ECB91C");
+                $(".infomsg").text("1");
+            });
+            $("#ontime2").click(function () {
+                $("#ontime3,#ontime4,#ontime5").css("color", "silver");
+                $("#ontime1,#ontime2").css("color", "#ECB91C");
+                $(".infomsg").text("2");
+            });
+            $("#ontime3").click(function () {
+                $("#ontime4,#ontime5").css("color", "silver");
+                $("#ontime1,#ontime2,#ontime3").css("color", "#ECB91C");
+                $(".infomsg").text("3");
+            });
+
+            $("#ontime4").click(function () {
+                $("#ontime5").css("color", "silver");
+                $("#ontime1,#ontime2,#ontime3,#ontime4").css("color", "#ECB91C");
+                $(".infomsg").text("4");
+            });
+
+            $("#ontime5").click(function () {
+                $("#ontime1,#ontime2,#ontime3,#ontime4,#ontime5").css("color", "#ECB91C");
+                $(".infomsg").text("5");
+            });
+
+        });
+
+        $(".ratingforfriendly").hover(function () {
+
+            $("#friendly1").click(function () {
+                $("#friendly2,#friendly3,#friendly4,#friendly5").css("color", "silver");
+                $("#friendly1").css("color", "#ECB91C");
+                $(".friendlymsg").text("1");
+            });
+            $("#friendly2").click(function () {
+                $("#friendly3,#friendly4,#friendly5").css("color", "silver");
+                $("#friendly1,#friendly2").css("color", "#ECB91C");
+                $(".friendlymsg").text("2");
+            });
+            $("#friendly3").click(function () {
+                $("#friendly4,#friendly5").css("color", "silver");
+                $("#friendly1,#friendly2,#friendly3").css("color", "#ECB91C");
+                $(".friendlymsg").text("3");
+            });
+
+            $("#friendly4").click(function () {
+                $("#friendly5").css("color", "silver");
+                $("#friendly1,#friendly2,#friendly3,#friendly4").css("color", "#ECB91C");
+                $(".friendlymsg").text("4");
+            });
+
+            $("#friendly5").click(function () {
+                //    $(".fa-star").css("color", "silver");
+                $("#friendly1,#friendly2,#friendly3,#friendly4,#friendly5").css("color", "#ECB91C");
+                $(".friendlymsg").text("5");
+            });
+        });
+        $(".ratingforquality").hover(function () {
+
+            $("#quality1").click(function () {
+                $("#quality2,#quality3,#quality4,#quality5").css("color", "silver");
+                $("#quality1").css("color", "#ECB91C");
+                $(".qualitymsg").text("1");
+            });
+            $("#quality2").click(function () {
+                $("#quality3,#quality4,#quality5").css("color", "silver");
+                $("#quality1,#quality2").css("color", "#ECB91C");
+                $(".qualitymsg").text("2");
+            });
+            $("#quality3").click(function () {
+                $("#quality4,#quality5").css("color", "silver");
+                $("#quality1,#quality2,#quality3").css("color", "#ECB91C");
+                $(".qualitymsg").text("3");
+            });
+
+            $("#quality4").click(function () {
+                $("#quality5").css("color", "silver");
+                $("#quality1,#quality2,#quality3,#quality4").css("color", "#ECB91C");
+                $(".qualitymsg").text("4");
+            });
+
+            $("#quality5").click(function () {
+                //    $(".fa-star").css("color", "silver");
+                $("#quality1,#quality2,#quality3,#quality4,#quality5").css("color", "#ECB91C");
+                $(".qualitymsg").text("5");
+            });
+
+
+        });
+    })
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+$(document).on('click', '.rateSPSerrvHistory', function () {
+
+    var data = {};
+    data.ServiceRequestId = parseInt(serviceRequestId);
+    $.ajax({
+        type: 'GET',
+        url: '/UserPage/GetRating',
+        contenttype: 'application/x-www-form-urlencoded; charset=utf-8',
+        data: data,
+        success: function (result) {
+            if (result == null) {
+                document.getElementById("show_rating_model").className = "d-none";
+
+            } else {
+                document.getElementById("show_rating_model").className = "show_rating_model";
+                var rating = parseInt(result.averageRating);
+                $('.star-ratingmodel').html("");
+
+
+                $('.service-provider-ratingmodel').html(result.serviceProvider);
+                $("#show_rating_model img.spavtar").attr("src", result.userProfilePicture);
+                for (var i = 0; i < 5; i++) {
+                    if (i < rating) {
+                        $('.star-ratingmodel').append('<i class="fa fa-star " style="color:#ECB91C;" ></i>');
+                    } else {
+                        $('.star-ratingmodel').append('<i class="fa fa-star " style="color:silver;"></i>');
+                    }
+                }
+                $('.star-ratingmodel').append(result.averageRating);
+            }
+        },
+        error: function () {
+
+            alert("Unable to Fetch Rating");
+        }
+    });
+});
+
+
+
+
+
+
+
+document.getElementById("confirm_rating").addEventListener("click", function () {
+
+    var data = {};
+    data.onTimeArrival = $(".infomsg").text();
+    data.friendly = $(".friendlymsg").text();
+    data.qualityOfService = $(".qualitymsg").text();
+    data.ratings = parseFloat((parseFloat(data.onTimeArrival) + parseFloat(data.friendly) + parseFloat(data.qualityOfService)) / 3);
+
+    data.comments = $("#feedbackcomment").val();
+    data.serviceRequestId = serviceRequestId;
+
+    $.ajax({
+
+        type: "POST",
+        url: "/UserPage/RateServiceProvider",
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        data: data,
+        success: function (result) {
+            if (result.value == "true") {
+                $("#myRatingModal").modal("hide");
+                //console.log("submited");
+
+            }
+            else {
+
+                alert("Rating Already Given !");
+
+
+            }
+        },
+        error: function (error) {
+            alert("error");
+        }
+
+    });
+
+
+});
+
+
+
+/************************************************************************* */
 
 
 
@@ -410,21 +612,25 @@ $("#SaveDetails").on('click', function () {
             url: '/UserPage/UpdateCustomer',
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: data,
-        success: function (result) {
+            success: function (result) {
 
-            if (result.value == "true") {
-                window.location.reload();
-                alert("User Details Updated");
+                if (result.value == "true") {
+
+                    
+                    alert("Details Updated Sucessfully.");
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 5000);
                  
-            }
-            else {
+                }
+                else {
 
-                alert("Update Unsuccessful Please Try Again!!")
+                    alert("Update Unsuccessful Please Try Again!!")
+                }
+            },
+            error: function () {
+                    alert("error");
             }
-        },
-        error: function () {
-                alert("error");
-        }
     });
     
 
@@ -528,7 +734,10 @@ $("#addAddresssave").on('click', function () {
                     document.getElementById("addAddresscancel").click();
                     alert("Address Added Successfully!");
 
-                    window.location.reload();
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 5000);
+
                     getAddress();
                 }
                 else {
@@ -543,14 +752,6 @@ $("#addAddresssave").on('click', function () {
         });
     
 });
-
-
-
-
-
-
-
-
 
 
 
@@ -751,3 +952,83 @@ function exportexcel() {
         fileext: ".xls"
     });
 }
+
+
+
+//City from pincode
+function getCityFromPostalCode(zip, Id) {
+    $.ajax({
+        method: "GET",
+        url: "https://api.postalpincode.in/pincode/" + zip,
+        dataType: 'json',
+        cache: false,
+        success: function (result) {
+            if (result[0].status == "Error" || result[0].status == "404") {
+
+                alert("Invalid PostalCode");
+
+            }
+            else {
+                $(Id).val(result[0].PostOffice[0].District).prop("disabled", true);
+
+                state = result[0].PostOffice[0].State;
+
+
+            }
+        },
+        error: function (error) {
+
+        }
+    });
+}
+
+
+$("#editAddressPostalCode").keyup(function () {
+    if ($("#editAddressPostalCode").val().length == 6) {
+        getCityFromPostalCode($("#editAddressPostalCode").val(), "#editAddressCity");
+    }
+});
+
+$("#addAddressPostalCode").keyup(function () {
+    if ($("#addAddressPostalCode").val().length == 6) {
+        getCityFromPostalCode($("#addAddressPostalCode").val(), "#addAddressCity");
+    }
+});
+
+
+
+const dashbordTablepagination = new DataTable("#DashboardTable", {
+    searching: false,
+    lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "All"]],
+    lengthChange: true,
+    responsive: false,
+    pagingType: "full_numbers",
+    language: {
+        paginate: {
+            first: "<img src='/Images/first-page.png' alt='first'/>",
+            previous: "<img src='/Images/polygon-1-copy-5.png' alt='previous' />",
+            next: "<img src='/Images/polygon-1-copy-5.png' alt='next' style='transform: rotate(180deg)' />",
+            last: "<img src='/Images/first-page.png' alt='first' style='transform: rotate(180deg) ' />"
+        }
+    },
+    info: true,
+    columnDefs: [{ orderable: false, targets: 4 }]
+});
+
+const ServiceHistoryTablepagination = new DataTable("#HistoryTable", {
+    searching: false,
+    lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "All"]],
+    lengthChange: true,
+    responsive: false,
+    pagingType: "full_numbers",
+    language: {
+        paginate: {
+            first: "<img src='/Images/first-page.png' alt='first'/>",
+            previous: "<img src='/Images/polygon-1-copy-5.png' alt='previous' />",
+            next: "<img src='/Images/polygon-1-copy-5.png' alt='next' style='transform: rotate(180deg)' />",
+            last: "<img src='/Images/first-page.png' alt='first' style='transform: rotate(180deg) ' />"
+        }
+    },
+    info: true,
+    columnDefs: [{ orderable: false, targets: 4 }]
+});

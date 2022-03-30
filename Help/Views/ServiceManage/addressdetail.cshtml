@@ -75,3 +75,57 @@
 
 </div>
 
+
+
+
+<script>
+
+    $(function () {
+
+        $("#addressForm").validate({
+
+            rules: {
+
+                AddressLine1: {
+                    required: true
+                },
+                AddressLine2: {
+                    required: true
+                },
+                PostalCode: {
+                    required: true,
+                    minlength: 6
+                },
+                Mobile: {
+                    required: true,
+                    minlength: 10
+                }
+            },
+
+            messages: {
+
+
+                AddressLine1: {
+                    required: "Please provide Address"
+                },
+                AddressLine2: {
+                    required: "Please provide Address"
+                },
+                PostalCode: {
+                    required: "Please provide PostalCode",
+                    minlength: "Minimum 6 characters required"
+                },
+                Mobile: {
+                    required: "Please provide Phone No.",,
+                    minlength: "Minimum 10 characters required"
+                }
+            },
+
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    });
+
+</script>
+

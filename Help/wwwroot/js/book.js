@@ -434,9 +434,9 @@ function completeBookService() {
                 alert("Invalid Schedule Entry");
             }
             else {
-                //$("#modalserviceid").text("service id : " + result.value);
-                // $("#completebookingmodalbtn").click();
-                alert("Booking has been Completed")
+                
+                alert("Booking has been Completed for Service ID: " + result.value);
+                window.location = "/UserPage/Customer";
             }
         },
         error: function () {

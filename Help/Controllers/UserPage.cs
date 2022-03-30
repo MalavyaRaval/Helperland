@@ -78,9 +78,18 @@ namespace Help.Controllers
 
                             dash.ServiceProvider = sp.FirstName + " " + sp.LastName;
 
-                            //decimal rating = _helperlandContext.Ratings.Where(x => x.RatingTo == service.ServiceProviderId).Average(x => x.Ratings);
+                            dash.UserProfilePicture = "/images/" + sp.UserProfilePicture;
+                            decimal rating;
 
-                            //dash.SPRatings = rating;
+                            if (_helperlandContext.Ratings.Where(x => x.RatingTo == service.ServiceProviderId).Count() > 0)
+                            {
+                                rating = _helperlandContext.Ratings.Where(x => x.RatingTo == service.ServiceProviderId).Average(x => x.Ratings);
+                            }
+                            else
+                            {
+                                rating = 0;
+                            }
+                            dash.AverageRating = (float)decimal.Round(rating, 1, MidpointRounding.AwayFromZero);
 
                         }
 
@@ -184,7 +193,6 @@ namespace Help.Controllers
             u.DateOfBirth = user.DateOfBirth;
             u.ModifiedDate = DateTime.Now;
 
-            //ViewBag.Name = u.FirstName;
 
             var result = _helperlandContext.Users.Update(u);
             _helperlandContext.SaveChanges();
@@ -399,6 +407,67 @@ namespace Help.Controllers
 
 
 
+        [HttpGet]
+        public JsonResult GetRating(CustomerDashboard ID)
+        {
+            ServiceRequest sr = _helperlandContext.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == ID.ServiceRequestId);
+
+            if (_helperlandContext.Ratings.Where(x => x.RatingTo == sr.ServiceProviderId).Count() > 0)
+            {
+                decimal avgrating = _helperlandContext.Ratings.Where(x => x.RatingTo == sr.ServiceProviderId).Average(x => x.Ratings);
+
+
+
+                CustomerDashboard customerDashboard = new CustomerDashboard();
+                customerDashboard.AverageRating = (float)decimal.Round(avgrating, 1, MidpointRounding.AwayFromZero);
+
+                User sp = _helperlandContext.Users.Where(x => x.UserId == sr.ServiceProviderId).FirstOrDefault();
+                customerDashboard.UserProfilePicture = "/images/" + sp.UserProfilePicture;
+                customerDashboard.ServiceProvider = sp.FirstName + " " + sp.LastName;
+
+                return new JsonResult(customerDashboard);
+            }
+            return new JsonResult(null);
+        }
+
+
+        public IActionResult RateServiceProvider(Rating rating)
+        {
+            int? Id = -1;
+            if (HttpContext.Session.GetInt32("userId") != null)
+            {
+                Id = HttpContext.Session.GetInt32("userId");
+            }
+            else if (Request.Cookies["userId"] != null)
+            {
+
+                Id = Convert.ToInt32(Request.Cookies["userId"]);
+            }
+
+            if (Id != null)
+            {
+                if (_helperlandContext.Ratings.Where(x => x.ServiceRequestId == rating.ServiceRequestId).Count() > 0)
+                {
+                    return Ok(Json("false"));
+                }
+
+
+                rating.RatingDate = DateTime.Now;
+                ServiceRequest sr = _helperlandContext.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == rating.ServiceRequestId);
+                rating.RatingTo = (int)sr.ServiceProviderId;
+                rating.RatingFrom = (int)Id;
+                //Console.WriteLine(rating.Ratings);
+
+                var result = _helperlandContext.Ratings.Add(rating);
+                _helperlandContext.SaveChanges();
+
+                if (result != null)
+                {
+                    return Ok(Json("true"));
+                }
+            }
+            return Ok(Json("false"));
+        }
 
 
 
@@ -1091,6 +1160,112 @@ namespace Help.Controllers
             }
         }
 
+
+
+
+        public JsonResult getRatingData()
+        {
+
+            int? Id = HttpContext.Session.GetInt32("userId");
+            if (Id == null)
+            {
+                Id = Convert.ToInt32(Request.Cookies["userId"]);
+            }
+
+            var ratingList = _helperlandContext.Ratings.Where(x => x.RatingTo == Id).ToList();
+
+            List<RatingDTO> ratingDTOsList = new List<RatingDTO>();
+
+            foreach (var temp in ratingList)
+            {
+
+                RatingDTO ratingDTO = new RatingDTO();
+
+                User customer = _helperlandContext.Users.FirstOrDefault(x => x.UserId == temp.RatingFrom);
+
+                string customerName = customer.FirstName + " " + customer.LastName;
+
+
+                ServiceRequest req = _helperlandContext.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == temp.ServiceRequestId);
+
+
+                ratingDTO.CustomerName = customerName;
+                ratingDTO.ServiceRequestId = temp.ServiceRequestId;
+                ratingDTO.ServiceDate = req.ServiceStartDate.ToString("dd/MM/yyyy");
+                ratingDTO.StartTime = req.ServiceStartDate.AddHours(0).ToString("HH:mm ");
+                var totaltime = (double)(req.ServiceHours + req.ExtraHours);
+                ratingDTO.EndTime = req.ServiceStartDate.AddHours(totaltime).ToString("HH:mm ");
+                ratingDTO.Rating = (double)temp.Ratings;
+                ratingDTO.Comments = temp.Comments;
+
+
+
+                if (ratingDTO.Rating > 4)
+                {
+                    ratingDTO.Remarks = "Excellent";
+                }
+                else if (ratingDTO.Rating > 3)
+                {
+                    ratingDTO.Remarks = "Very Good";
+                }
+                else if (ratingDTO.Rating > 2)
+                {
+                    ratingDTO.Remarks = "Good"; ;
+                }
+                else if (ratingDTO.Rating > 1)
+                {
+                    ratingDTO.Remarks = "Average";
+                }
+                else if (ratingDTO.Rating >= 0)
+                {
+                    ratingDTO.Remarks = "Poor";
+                }
+
+                ratingDTOsList.Add(ratingDTO);
+
+
+            }
+
+            return Json(ratingDTOsList);
+
+        }
+
+
+
+        public JsonResult GetServiceSchedule()
+        {
+            int? Id = HttpContext.Session.GetInt32("userId");
+            if (Id == null)
+            {
+                Id = Convert.ToInt32(Request.Cookies["userId"]);
+            }
+
+
+            if (Id != null)
+            {
+                List<CustomerDashboard> dashbord = new List<CustomerDashboard>();
+
+                List<ServiceRequest> table = _helperlandContext.ServiceRequests.Where(x => x.ServiceProviderId == Id && (x.Status == 2 || x.Status == 3)).ToList();
+                foreach (var data in table)
+                {
+                    CustomerDashboard sr = new CustomerDashboard
+                    {
+                        ServiceRequestId = data.ServiceRequestId,
+
+                        Date = data.ServiceStartDate.ToString("yyyy-MM-dd"),
+                        StartTime = data.ServiceStartDate.ToString("HH:mm"),
+                        EndTime = data.ServiceStartDate.AddHours((double)data.SubTotal).ToString("HH:mm"),
+
+                        Status = (int)data.Status
+                    };
+
+                    dashbord.Add(sr);
+                }
+
+                return new JsonResult(dashbord);
+            }
+            return new JsonResult("false");
+        }
 
     }
 
