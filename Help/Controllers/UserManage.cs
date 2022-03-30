@@ -42,6 +42,8 @@ namespace Help.Controllers
 
                 _helperlandContext.Users.Add(user);
                 _helperlandContext.SaveChanges();
+
+                TempData["CustReg"] = "Customer Registered Successfully.";
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -92,25 +94,51 @@ namespace Help.Controllers
                         return RedirectToAction("Index", "Home");
                     }
 
+                    if (user.Remember)
+                    {
+                        CookieOptions cookieRemember = new CookieOptions();
+                        cookieRemember.Expires = DateTime.Now.AddSeconds(604800);
+                        Response.Cookies.Append("userId", Convert.ToString(U.UserId), cookieRemember);
+                    }
+
+                    HttpContext.Session.SetInt32("userId", U.UserId);
                     return RedirectToAction("Customer", "UserPage");
                 }
                 else if (U.UserTypeId == 2)
                 {
                     if (U.IsApproved == false || U.IsActive == false)
                     {
-                        TempData["NotActive"] = "Account Deactivated, Please Contact Admin.";
+                        TempData["NotActive"] = "Access Denied, Please Contact Admin.";
                         return RedirectToAction("Index", "Home");
                     }
 
+                    if (user.Remember)
+                    {
+                        CookieOptions cookieRemember = new CookieOptions();
+                        cookieRemember.Expires = DateTime.Now.AddSeconds(604800);
+                        Response.Cookies.Append("userId", Convert.ToString(U.UserId), cookieRemember);
+                    }
+
+                    HttpContext.Session.SetInt32("userId", U.UserId);
                     return RedirectToAction("Provider", "UserPage");
                 }
                 else if (U.UserTypeId == 3)
                 {
                     if (U.IsActive == false)
                     {
-                        TempData["AdminAccess"] = "Access Denied !!";
+                        TempData["AdminAccess"] = "Access Denied !";
                         return RedirectToAction("Index", "Home");
                     }
+
+                    if (user.Remember)
+                    {
+                        CookieOptions cookieRemember = new CookieOptions();
+                        cookieRemember.Expires = DateTime.Now.AddSeconds(604800);
+                        Response.Cookies.Append("userId", Convert.ToString(U.UserId), cookieRemember);
+                    }
+
+
+                    HttpContext.Session.SetInt32("userId", U.UserId);
 
                     return RedirectToAction("AdminDashboard", "Admin");
                 }
@@ -160,6 +188,8 @@ namespace Help.Controllers
 
                 _helperlandContext.Users.Add(signup);
                 _helperlandContext.SaveChanges();
+
+                TempData["ProReg"] = "Service Provider Registered Successfully.";
                 return RedirectToAction("Index", "Home");
             }
             else

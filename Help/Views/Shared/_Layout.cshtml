@@ -104,6 +104,28 @@
         </text>
     }
 
+    @if (TempData["CustReg"] != null)
+    {
+        <text>
+            <script>
+            $(document).ready(function () {
+               alert('@TempData["CustReg"]');
+            });
+            </script>
+        </text>
+    }
+
+    @if (TempData["ProReg"] != null)
+    {
+        <text>
+            <script>
+            $(document).ready(function () {
+               alert('@TempData["ProReg"]');
+            });
+            </script>
+        </text>
+    }
+
     @RenderSection("Scripts", required: false)
 
 
