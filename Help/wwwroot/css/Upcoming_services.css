@@ -796,6 +796,11 @@ tbody tr{
     .page-control{
         display: none;
     }
+
+
+    #newServiceReqCompleteBtn{
+        margin-bottom: 10px;
+    }
 }
 
 @media screen and (min-width: 330px) and (max-width: 426px){
@@ -1056,6 +1061,11 @@ tbody tr{
     .page-control {
         display: none;
     }
+
+
+    #newServiceReqCompleteBtn {
+        margin-bottom: 10px;
+    }
 }
 @media screen and (min-width: 427px) and (max-width: 769px){
     .navbar{
@@ -1309,6 +1319,10 @@ tbody tr{
     .page-control {
         display: none;
     }
+
+    #newServiceReqCompleteBtn {
+        margin-bottom: 10px;
+    }
     }
     
     @media screen and (min-width: 770px) and (max-width: 991px){
@@ -1539,5 +1553,9 @@ tbody tr{
     .SH-ServId, .SH-ServDate, .SH-CustDetail{
         padding: 10px ;
     }
+
+        #newServiceReqCompleteBtn {
+            margin-bottom: 15px;
+        }
 }
         

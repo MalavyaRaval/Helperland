@@ -610,9 +610,9 @@ namespace Help.Controllers
                     var totaltime = (double)(req.ServiceHours + req.ExtraHours);
                     temp.EndTime = req.ServiceStartDate.AddHours(totaltime).ToString("HH:mm ");
                     temp.Status = (int)req.Status;
-                    //temp.TotalCost = req.TotalCost;
-                    // temp.HasPet = req.HasPets;
-                    //temp.Comments = req.Comments;
+                    temp.TotalCost = req.TotalCost;
+                    temp.HasPet = req.HasPets;
+                    temp.Comments = req.Comments;
                     User customer = _helperlandContext.Users.FirstOrDefault(x => x.UserId == req.UserId);
                     temp.CustomerName = customer.FirstName + " " + customer.LastName;
 

@@ -330,6 +330,7 @@ function saveAddress() {
             data: data,
             success: function (result) {
                 if (result.value == "true") {
+                    alert("Address Saved.");
                     document.getElementById("addressCancelBtn").click();
                     loadAddress();
                 }
@@ -431,12 +432,15 @@ function completeBookService() {
         data: data,
         success: function (result) {
             if (result.value == "false") {
-                alert("Invalid Schedule Entry");
+                $('#NewServiceAcceptStatus').text("Opps! Something Went wrong").css("color", "red");
+                $('#Model_SID').text("Please Try again");
+                $('#acceptAlert').click();
             }
             else {
                 
-                alert("Booking has been Completed for Service ID: " + result.value);
-                window.location = "/UserPage/Customer";
+                $('#NewServiceAcceptStatus').text("Service Request has been Created Successfully").css("color", "Green");
+                $('#Model_SID').text("Your service id : " + result.value);
+                $('#acceptAlert').click();
             }
         },
         error: function () {
